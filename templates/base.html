@@ -54,7 +54,12 @@
 
     <!-- MENÚ DE NAVEGACIÓN (Pestañas) -->
     <header>
-        <h1>{{ empresa.nombre }}</h1>
+        <!-- CONTENEDOR PARA EL LOGO Y EL TÍTULO AL LADO -->
+        <div style="display: flex; align-items: center; gap: 15px;">
+            <img src="{{ url_for('logo', filename='logoV1.png') }}" alt="Logo de la empresa" style="height: 45px; width: auto; border-radius: 4px;">
+            <h1 style="font-size: 1.5rem; margin: 0; font-weight: bold;">{{ empresa.nombre }}</h1>
+        </div>
+
         <nav>
             <!-- [PERSONALIZACIÓN] Agrega o quita pestañas aquí -->
             <a href="{{ url_for('inicio') }}">Inicio</a>
