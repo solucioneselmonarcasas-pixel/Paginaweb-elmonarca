@@ -29,9 +29,18 @@ def servicios():
     """
     # Lista de servicios de ejemplo que puedes modificar fácilmente
     lista_servicios = [
-        {"titulo": "Desarrollo Web", "descripcion": "Creamos páginas modernas y adapt celulares."},
-        {"titulo": "Consultoría IT", "descripcion": "Asesoría experta para digitalizar tu empresa."},
-        {"titulo": "Soporte Técnico", "descripcion": "Mantenimiento preventivo y correctivo."}
+        {
+            "titulo": "Plan de Saneamiento Básico", 
+            "descripcion": "Incluye manual de limpieza y desinfección, gestión de residuos, control de plagas y control de abastecimiento de agua potable."
+        },
+        {
+            "titulo": "Gestión de Calidad", 
+            "descripcion": "Incluye plan de saneamiento básico, criterios de calidad de productos y fichas técnicas."
+        },
+        {
+            "titulo": "Gestión Calidad y Ambiental", 
+            "descripcion": "Incluye plan de saneamiento básico, gestión de calidad, análisis de aspectos e impactos ambientales y buenas prácticas ambientales."
+        }
     ]
     return render_template('servicios.html', empresa=EMPRESA_INFO, servicios=lista_servicios)
 
