@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section style="max-width: 900px; margin: 0 auto;">
+    
+    <!-- ENCABEZADO DE LA SECCIÓN -->
+    <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-size: 2.2rem; color: var(--primary-color); margin-bottom: 0.5rem;">
+            Nuestros Servicios Empresariales
+        </h2>
+        <p style="font-size: 1.1rem; color: #64748b;">
+            Ofrecemos soluciones integrales adaptadas a las necesidades normativas y de calidad de tu empresa.
+        </p>
+        <hr style="margin: 1.5rem auto; width: 80px; border: 2px solid var(--secondary-color); border-radius: 2px;">
+    </div>
+
+    <!-- CONTENEDOR DE TARJETAS DE SERVICIOS -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+        {% for servicio in servicios %}
+            <div style="background-color: white; border-radius: 10px; padding: 1.8rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); border-top: 5px solid var(--primary-color); transition: transform 0.2s ease;">
+                <!-- TÍTULO DEL SERVICIO -->
+                <h3 style="color: var(--primary-color); margin-top: 0; font-size: 1.3rem;">
+                    {{ servicio.titulo }}
+                </h3>
+                
+                <!-- DESCRIPCIÓN DEL SERVICIO -->
+                <p style="color: #475569; line-height: 1.6; font-size: 0.95rem;">
+                    {{ servicio.descripcion }}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+
+</section>
+{% endblock %}
