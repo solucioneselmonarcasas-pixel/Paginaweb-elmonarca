@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ empresa.nombre }}</title>
+    <!-- Estilos CSS básicos integrados -->
+    <style>
+        :root {
+            --primary-color: {{ empresa.color_primario }};
+            --secondary-color: {{ empresa.color_secundario }};
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8fafc;
+            color: #334155;
+        }
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+        }
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+        main {
+            padding: 3rem 2rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        footer {
+            background-color: #0f172a;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENÚ DE NAVEGACIÓN (Pestañas) -->
+    <header>
+        <h1>{{ empresa.nombre }}</h1>
+        <nav>
+            <!-- [PERSONALIZACIÓN] Agrega o quita pestañas aquí -->
+            <a href="{{ url_for('inicio') }}">Inicio</a>
+            <a href="{{ url_for('servicios') }}">Servicios</a>
+        </nav>
+    </header>
+
+    <!-- CONTENIDO DINÁMICO -->
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <p>&copy; 2026 {{ empresa.nombre }}. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
