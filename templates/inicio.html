@@ -1,10 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-<section style="text-align: center;">
-    <!-- [PERSONALIZACIÓN] Cambia los textos principales de tu negocio -->
-    <h2 style="font-size: 2.5rem; color: var(--primary-color);">Bienvenido a {{ empresa.nombre }}</h2>
-    <p style="font-size: 1.2rem; color: #64748b;">{{ empresa.slogan }}</p>
-    <hr style="margin: 2rem auto; width: 50%; border: 1px solid #cbd5e1;">
-    <p>Ayudamos a las empresas a crecer mediante soluciones empresariales eficientes.</p>
-</section>
+<main>
+    <!-- ==========================================
+       SECCIÓN DE BIENVENIDA Y PRESENTACIÓN
+       ========================================== -->
+    <section style="text-align: center;" class="welcome-section">
+        <!-- Título principal usando el nombre dinámico de la empresa -->
+        <h2 style="font-size: 2.5rem; color: var(--primary-color);">Bienvenido a {{ empresa.nombre }}</h2>
+        
+        <!-- Slogan dinámico de la empresa -->
+        <p style="font-size: 1.2rem; color: #64748b;">{{ empresa.slogan }}</p>
+        
+        <!-- Línea divisoria centrada -->
+        <hr style="margin: 2rem auto; width: 50%; border: 1px solid #cbd5e1;">
+        
+        <p>Ayudamos a las empresas a crecer mediante soluciones empresariales eficientes.</p>
+    </section>
+
+    <!-- ==========================================
+       IMAGEN PRINCIPAL DE LA EMPRESA (HERO IMAGE)
+       ========================================== -->
+    <section class="hero-image-container" style="text-align: center;">
+        <!-- Cambia 'images/tu-imagen.jpg' por el nombre real de tu archivo en la carpeta static/images -->
+        <img src="{{ url_for('static', filename='Logo V1.jpg') }}" alt="Imagen principal de {{ empresa.nombre }}" class="main-image">
+    </section>
+
+    <!-- ==========================================
+       SECCIONES DE MISIÓN Y VISIÓN
+       ========================================== -->
+    <section class="mission-vision-container">
+        <!-- Tarjeta de Misión -->
+        <div class="card">
+            <h2>Nuestra Misión</h2>
+            <p>Brindar soluciones innovadoras y de alta calidad que impulsen la eficiencia operativa y el crecimiento estratégico de nuestros clientes.</p>
+        </div>
+        
+        <!-- Tarjeta de Visión -->
+        <div class="card">
+            <h2>Nuestra Visión</h2>
+            <p>Ser la empresa líder en consultoría a nivel local, reconocida por nuestra excelencia, compromiso y capacidad de adaptación al cambio digital.</p>
+        </div>
+    </section>
+</main>
 {% endblock %}
