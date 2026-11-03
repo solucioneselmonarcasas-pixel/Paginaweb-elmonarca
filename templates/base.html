@@ -6,39 +6,62 @@
     <title>{{ empresa.nombre }}</title>
     <!-- Estilos CSS básicos integrados -->
     <style>
+        /* ==========================================
+           1. VARIABLES GLOBALES DE COLORES
+           ========================================== */
         :root {
             --primary-color: {{ empresa.color_primario }};
             --secondary-color: {{ empresa.color_secundario }};
         }
+
+        /* ==========================================
+           2. ESTILOS GENERALES DEL CUERPO (BODY)
+           ========================================== */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 1;
-            padding: 1;
+            margin: 0; /* Aseguramos que no haya márgenes no deseados en los bordes */
+            padding: 0;
             background-color: #FFFFFF;
             color: #0F4C5C;
         }
+
+        /* ==========================================
+           3. CABECERA (HEADER)
+           ========================================== */
         header {
             background-color: var(--primary-color);
             color: white;
             padding: 1rem 2rem;
             display: flex;
-            justify-content: space-between;
+            justify-content: space-between; /* Separa el logo/título de los enlaces de navegación */
             align-items: center;
         }
+
+        /* Enlaces de la barra de navegación */
         nav a {
             color: white;
             text-decoration: none;
             margin-left: 20px;
             font-weight: 600;
         }
+
+        /* Efecto al pasar el cursor sobre los enlaces */
         nav a:hover {
             color: var(--secondary-color);
         }
+
+        /* ==========================================
+           4. CONTENIDO PRINCIPAL (MAIN) - CENTRADO
+           ========================================== */
         main {
             padding: 3rem 2rem;
-            max-width: 1000px;
-            margin: 1 auto;
+            max-width: 1000px;  /* Limita el ancho máximo para una lectura cómoda */
+            margin: 0 auto;     /* Centra automáticamente el bloque horizontalmente */
+            text-align: center; /* Centra los textos y títulos internos */
         }
+        /* ==========================================
+           5. PIE DE PÁGINA (FOOTER) - FLOTANTE
+           ========================================== */
         footer {
             background-color: #0f172a;
             color: white;
