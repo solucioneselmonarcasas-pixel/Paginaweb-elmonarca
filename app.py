@@ -30,18 +30,21 @@ def servicios():
     # Lista de servicios de ejemplo que puedes modificar fácilmente
     lista_servicios = [
         {
-            "titulo": "Plan de Saneamiento Básico", 
-            "descripcion": "Incluye manual de limpieza y desinfección, gestión de residuos, control de plagas y control de abastecimiento de agua potable."
-        },
-        {
-            "titulo": "Gestión de Calidad", 
-            "descripcion": "Incluye plan de saneamiento básico, criterios de calidad de productos y fichas técnicas."
-        },
-        {
-            "titulo": "Gestión Calidad y Ambiental", 
-            "descripcion": "Incluye plan de saneamiento básico, gestión de calidad, análisis de aspectos e impactos ambientales y buenas prácticas ambientales."
-        }
-    ]
+        "titulo": "Plan de Saneamiento Básico",
+        "descripcion": "Incluye manual de limpieza y desinfección, gestión de residuos, control de plagas y control de abastecimiento de agua potable.",
+        "imagen": "saneamiento.png"  # <-- Nombre del archivo guardado en tu carpeta static
+    },
+    {
+        "titulo": "Gestión de Calidad",
+        "descripcion": "Incluye plan de saneamiento básico, criterios de calidad de productos y fichas técnicas.",
+        "imagen": "calidad.png"      # <-- Nombre del archivo guardado en tu carpeta static
+    },
+    {
+        "titulo": "Gestión Calidad y Ambiental",
+        "descripcion": "Incluye plan de saneamiento básico, gestión de calidad, análisis de aspectos e impactos ambientales y buenas prácticas ambientales.",
+        "imagen": "ambiental.png"    # <-- Nombre del archivo guardado en tu carpeta static
+    }
+]
     return render_template('servicios.html', empresa=EMPRESA_INFO, servicios=lista_servicios)
 
 # ==========================================
