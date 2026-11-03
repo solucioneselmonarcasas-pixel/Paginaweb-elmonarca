@@ -8,7 +8,7 @@ app = Flask(__name__)
 # Puedes cambiar aquí los datos globales que se repiten en la web
 EMPRESA_INFO = {
     "nombre": "El Monarca Soluciones Empresariales",
-    "slogan": "Soluciones tecnológicas para tu negocio",
+    "slogan": "Soluciones empresariales para tu negocio",
     "color_primario": "#0F4C5C",  # [PERSONALIZACIÓN] Cambia el color principal (Ej. Azul oscuro)
     "color_secundario": "#F28C28" # [PERSONALIZACIÓN] Cambia el color de acento (Ej. Azul claro)
 }
