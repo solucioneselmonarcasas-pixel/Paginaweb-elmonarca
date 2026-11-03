@@ -78,6 +78,23 @@
             box-sizing: border-box;
             /* Ya no necesitamos position: fixed ni transform, ahora forma parte natural del flujo */
         }
+        /* ==========================================
+           6. AJUSTE DE LA IMAGEN PRINCIPAL
+           ========================================== */
+        .hero-image-container {
+            margin: 2.5rem 0;
+            text-align: center;
+        }
+
+        .main-image {
+            width: 100%;            /* Se adapta al ancho disponible de la pantalla */
+            max-width: 450px;       /* Define el ancho máximo que puede alcanzar (puedes cambiarlo a 400px o 500px según prefieras) */
+            height: auto;           /* Mantiene la proporción original de la imagen para que no se deforme */
+            max-height: 350px;      /* Limita la altura máxima para evitar que sea muy alargada */
+            object-fit: contain;    /* Asegura que toda la imagen completa sea visible dentro del contenedor */
+            border-radius: 12px;    /* Esquinas redondeadas elegantes */
+            box-shadow: 0 4px 12px rgba(15, 76, 92, 0.15); /* Sombra sutil acorde al diseño */
+        }
     </style>
 </head>
 <body>
