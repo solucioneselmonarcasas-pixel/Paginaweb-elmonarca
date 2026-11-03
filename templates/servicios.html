@@ -20,12 +20,12 @@
             <div style="background-color: white; border-radius: 10px; padding: 1.8rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); border-top: 5px solid var(--primary-color); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s ease;">
                 
                 <div>
-                    <!-- IMAGEN DINÁMICA DEL SERVICIO (Rectangular y autoajustable) -->
+                    <!-- IMAGEN DINÁMICA DEL SERVICIO -->
                     {% if servicio.imagen %}
-                    <div style="margin-bottom: 1.2rem; text-align: center; width: 100%; height: 180px; overflow: hidden; border-radius: 8px; background-color: #f8fafc;">
+                    <div style="margin-bottom: 1.2rem; text-align: center; width: 100%; height: 160px; overflow: hidden; border-radius: 8px; background-color: #f8fafc; display: flex; align-items: center; justify-content: center; padding: 10px; box-sizing: border-box;">
                         <img src="{{ url_for('static', filename=servicio.imagen) }}" 
                              alt="{{ servicio.titulo }}" 
-                             style="width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;">
+                             style="max-width: 100%; max-height: 100%; object-fit: contain; display: block;">
                     </div>
                     {% endif %}
 
