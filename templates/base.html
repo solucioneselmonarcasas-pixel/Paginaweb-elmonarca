@@ -15,14 +15,17 @@
         }
 
         /* ==========================================
-           2. ESTILOS GENERALES DEL CUERPO (BODY)
+           2. ESTILOS GENERALES Y DISEÑO FLEXBOX (BODY)
            ========================================== */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0; /* Aseguramos que no haya márgenes no deseados en los bordes */
+            margin: 0;
             padding: 0;
             background-color: #FFFFFF;
             color: #0F4C5C;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ocupa al menos toda la altura de la pantalla */
         }
 
         /* ==========================================
@@ -33,7 +36,7 @@
             color: white;
             padding: 1rem 2rem;
             display: flex;
-            justify-content: space-between; /* Separa el logo/título de los enlaces de navegación */
+            justify-content: space-between;
             align-items: center;
         }
 
@@ -51,49 +54,37 @@
         }
 
         /* ==========================================
-           4. CONTENIDO PRINCIPAL (MAIN) - CENTRADO
+           4. CONTENIDO PRINCIPAL (MAIN) - CENTRADO Y FLEXIBLE
            ========================================== */
         main {
+            flex: 1; /* Hace que este espacio crezca y empuje el footer al fondo si sobra pantalla */
             padding: 3rem 2rem;
-            max-width: 1000px;  /* Limita el ancho máximo para una lectura cómoda */
-            margin: 0 auto;     /* Centra automáticamente el bloque horizontalmente */
-            text-align: center; /* Centra los textos y títulos internos */
+            max-width: 1000px;
+            width: 100%;
+            margin: 0 auto;
+            text-align: center;
+            box-sizing: border-box;
         }
+
         /* ==========================================
-           5. PIE DE PÁGINA (FOOTER) - FLOTANTE
+           5. PIE DE PÁGINA (FOOTER) - ESTÁTICO AL FONDO
            ========================================== */
         footer {
             background-color: #0f172a;
             color: white;
             text-align: center;
-            padding: 1rem 2rem;
-            position: fixed;
-            bottom: 20px;       /* Lo separa un poco del borde inferior de la pantalla */
-            left: 50%;          /* Lo empuja al 50% del ancho de la pantalla */
-            transform: translateX(-50%); /* Lo retrocede exactamente la mitad de su propio ancho para centrarlo */
-            width: 80%;         /* Ajusta aquí el ancho que prefieras (ej. 80% o un valor fijo como 800px) */
-            max-width: 900px;   /* Evita que se vea demasiado ancho en pantallas grandes */
-            border-radius: 8px; /* Opcional: redondea todas las esquinas para que flote como una tarjeta */
-        }
-        /* ==========================================
-           6. AJUSTES PARA DISPOSITIVOS MÓVILES
-           ========================================== */
-        main {
-            /* Arriba | Derecha | Abajo (espacio extra para el footer) | Izquierda */
-            padding: 3rem 2rem 10rem 2rem;  
-            max-width: 1000px;  
-            margin: 0 auto;     
-            text-align: center; 
+            padding: 1.5rem 2rem;
+            width: 100%;
+            box-sizing: border-box;
+            /* Ya no necesitamos position: fixed ni transform, ahora forma parte natural del flujo */
         }
     </style>
 </head>
 <body>
 
-   <!-- MENÚ DE NAVEGACIÓN (Pestañas) -->
+   <!-- MENÚ DE NAVIGATION (Pestañas) -->
     <header>
-        <!-- CONTENEDOR PARA EL LOGO Y EL TÍTULO AL LADO -->
         <div style="display: flex; align-items: center; gap: 15px;">
-            <!-- Contenedor con fondo blanco y padding para que resalte el logo -->
             <div style="background-color: white; padding: 4px 8px; border-radius: 6px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
                 <img src="{{ url_for('static', filename='LogoV2.png') }}" alt="Logo de la empresa" style="height: 45px; width: auto; display: block;">
             </div>

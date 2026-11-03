@@ -2,8 +2,8 @@
 {% block content %}
 <main>
     <!-- ==========================================
-       SECCIÓN DE BIENVENIDA Y PRESENTACIÓN
-       ========================================== -->
+        SECCIÓN DE BIENVENIDA Y PRESENTACIÓN
+        ========================================== -->
     <section style="text-align: center;" class="welcome-section">
         <!-- Título principal usando el nombre dinámico de la empresa -->
         <h2 style="font-size: 2.5rem; color: var(--primary-color);">Bienvenido a {{ empresa.nombre }}</h2>
@@ -18,16 +18,16 @@
     </section>
 
     <!-- ==========================================
-       IMAGEN PRINCIPAL DE LA EMPRESA (HERO IMAGE)
-       ========================================== -->
+        IMAGEN PRINCIPAL DE LA EMPRESA (HERO IMAGE)
+        ========================================== -->
     <section class="hero-image-container" style="text-align: center;">
-        <!-- Cambia 'images/tu-imagen.jpg' por el nombre real de tu archivo en la carpeta static/images -->
-        <img src="{{ url_for('static', filename='LogoV1.jpg') }}" alt="Imagen principal de {{ empresa.nombre }}" class="main-image">
+        <!-- Se corrigió la extensión a .png y se removió la carpeta 'images/' porque está en la raíz de static -->
+        <img src="{{ url_for('static', filename='LogoV1.png') }}" alt="Imagen principal de {{ empresa.nombre }}" class="main-image">
     </section>
 
     <!-- ==========================================
-       SECCIONES DE MISIÓN Y VISIÓN
-       ========================================== -->
+        SECCIONES DE MISIÓN Y VISIÓN
+        ========================================== -->
     <section class="mission-vision-container">
         <!-- Tarjeta de Misión -->
         <div class="card">
