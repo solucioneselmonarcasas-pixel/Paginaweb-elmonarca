@@ -43,12 +43,14 @@
             background-color: #0f172a;
             color: white;
             text-align: center;
-            padding: 1.5rem;
+            padding: 1rem 2rem;
             position: fixed;
-            bottom: 0;
-            width: 80%;
-            left: 10%; /* Esto lo centra dejando un 10% libre a cada lado */
-            border-radius: 8px 8px 0 0; /* Opcional: redondear las esquinas superiores */
+            bottom: 20px;       /* Lo separa un poco del borde inferior de la pantalla */
+            left: 50%;          /* Lo empuja al 50% del ancho de la pantalla */
+            transform: translateX(-50%); /* Lo retrocede exactamente la mitad de su propio ancho para centrarlo */
+            width: 80%;         /* Ajusta aquí el ancho que prefieras (ej. 80% o un valor fijo como 800px) */
+            max-width: 900px;   /* Evita que se vea demasiado ancho en pantallas grandes */
+            border-radius: 8px; /* Opcional: redondea todas las esquinas para que flote como una tarjeta */
         }
     </style>
 </head>
