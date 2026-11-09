@@ -1,45 +1,87 @@
 {% extends "base.html" %}
 {% block content %}
-<main>
-    <!-- ==========================================
-        SECCIÓN DE BIENVENIDA Y PRESENTACIÓN
-        ========================================== -->
-    <section style="text-align: center;" class="welcome-section">
-        <!-- Título principal usando el nombre dinámico de la empresa -->
-        <h2 style="font-size: 2.5rem; color: var(--primary-color);">Bienvenido a {{ empresa.nombre }}</h2>
-        
-        <!-- Slogan dinámico de la empresa -->
-        <p style="font-size: 1.2rem; color: #64748b;">{{ empresa.slogan }}</p>
-        
-        <!-- Línea divisoria centrada -->
-        <hr style="margin: 2rem auto; width: 50%; border: 1px solid #cbd5e1;">
-        
-        <p>Ayudamos a las empresas a crecer mediante soluciones empresariales eficientes.</p>
-    </section>
 
-    <!-- ==========================================
-        IMAGEN PRINCIPAL DE LA EMPRESA (HERO IMAGE)
-        ========================================== -->
-    <section class="hero-image-container" style="text-align: center;">
-        <!-- Se corrigió la extensión a .png y se removió la carpeta 'images/' porque está en la raíz de static -->
-        <img src="{{ url_for('static', filename='LogoV1.png') }}" alt="Imagen principal de {{ empresa.nombre }}" class="main-image">
-    </section>
+<section class="portada">
+  <div class="portada__interior">
+    <div class="portada__texto">
+      <h1>Tu establecimiento, listo para la visita sanitaria</h1>
+      <p class="portada__entrada">Documentamos e implementamos el plan de saneamiento básico que exige la Resolución 2674 de 2013 a bares, restaurantes y panaderías, y dejamos a tu equipo llevando los registros.</p>
+      <div class="acciones">
+        <a class="boton" href="{{ empresa.formulario }}" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico</a>
+        <a class="boton boton--secundario" href="{{ url_for('servicios') }}">Comparar planes</a>
+      </div>
+    </div>
 
-    <!-- ==========================================
-        SECCIONES DE MISIÓN Y VISIÓN
-        ========================================== -->
-    <section class="mission-vision-container">
-        <!-- Tarjeta de Misión -->
-        <div class="card">
-            <h2>Nuestra Misión</h2>
-            <p>Brindar soluciones innovadoras y de alta calidad que impulsen la eficiencia operativa y el crecimiento estratégico de nuestros clientes.</p>
-        </div>
-        
-        <!-- Tarjeta de Visión -->
-        <div class="card">
-            <h2>Nuestra Visión</h2>
-            <p>Ser la empresa líder en consultoría a nivel local, reconocida por nuestra excelencia, compromiso y capacidad de adaptación al cambio digital.</p>
-        </div>
-    </section>
-</main>
+    {# Elemento central: la lista que revisa el inspector, con los chulos que se marcan al cargar #}
+    <aside class="acta" aria-labelledby="acta-titulo">
+      <div class="acta__cabeza">
+        <p id="acta-titulo" class="acta__titulo">Lo que revisa el inspector</p>
+        <p class="acta__norma">Plan de saneamiento básico, Resolución 2674 de 2013</p>
+      </div>
+      <ul class="acta__lista">
+        {% for p in programas %}
+        <li>
+          <svg class="chulo" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <rect x="1.5" y="1.5" width="21" height="21" rx="3"/>
+            <path d="M6.5 12.5l3.8 3.8 7.2-8.6"/>
+          </svg>
+          <span><strong>{{ p.nombre }}</strong>{{ p.evidencia }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="acta__pie">Cada programa debe estar escrito, implementado y con registros al día.</p>
+    </aside>
+  </div>
+</section>
+
+<section class="bloque" aria-labelledby="programas-titulo">
+  <div class="bloque__interior">
+    <h2 id="programas-titulo">Los cuatro programas, a la medida de tu cocina</h2>
+    <p class="bloque__entrada">No entregamos plantillas genéricas: cada programa se escribe con las áreas, equipos y rutinas reales de tu establecimiento.</p>
+    <div class="programas">
+      {% for p in programas %}
+      <figure class="programa">
+        <img src="{{ url_for('static', filename='img/' ~ p.imagen ~ '-320.webp') }}"
+             srcset="{{ url_for('static', filename='img/' ~ p.imagen ~ '-320.webp') }} 320w, {{ url_for('static', filename='img/' ~ p.imagen ~ '-640.webp') }} 640w"
+             sizes="(max-width: 600px) 45vw, 260px" width="320" height="320" loading="lazy" decoding="async" alt="">
+        <figcaption><strong>{{ p.nombre }}</strong>{{ p.detalle }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="bloque bloque--tenue" aria-labelledby="proceso-titulo">
+  <div class="bloque__interior proceso">
+    <h2 id="proceso-titulo">Cómo trabajamos</h2>
+    <ol class="pasos">
+      <li><strong>Diagnóstico</strong>Visitamos tu establecimiento y lo evaluamos con el formato de autoevaluación sanitaria.</li>
+      <li><strong>Documentación</strong>Elaboramos los programas, procedimientos y formatos con la información de tu negocio.</li>
+      <li><strong>Implementación</strong>Capacitamos a tu equipo en buenas prácticas y ponemos en marcha los registros.</li>
+      <li><strong>Seguimiento</strong>Revisamos el cumplimiento y ajustamos lo necesario antes de cada visita.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="bloque bloque--oscuro" aria-labelledby="proposito-titulo">
+  <div class="bloque__interior proposito">
+    <h2 id="proposito-titulo" class="oculto">Misión y visión</h2>
+    <div>
+      <h3>Misión</h3>
+      <p>Brindar soluciones innovadoras y de alta calidad que impulsen la eficiencia operativa y el crecimiento estratégico de nuestros clientes.</p>
+    </div>
+    <div>
+      <h3>Visión</h3>
+      <p>Ser la empresa líder en consultoría a nivel local, reconocida por nuestra excelencia, compromiso y capacidad de adaptación al cambio digital.</p>
+    </div>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="cierre__interior">
+    <h2>Cuéntanos de tu establecimiento</h2>
+    <p>Responde el formulario y te contactamos para agendar el diagnóstico.</p>
+    <a class="boton" href="{{ empresa.formulario }}" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico</a>
+  </div>
+</section>
 {% endblock %}

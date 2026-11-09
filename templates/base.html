@@ -1,128 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ empresa.nombre }}</title>
-    <!-- Estilos CSS básicos integrados -->
-    <style>
-        /* ==========================================
-           1. VARIABLES GLOBALES DE COLORES
-           ========================================== */
-        :root {
-            --primary-color: {{ empresa.color_primario }};
-            --secondary-color: {{ empresa.color_secundario }};
-        }
-
-        /* ==========================================
-           2. ESTILOS GENERALES Y DISEÑO FLEXBOX (BODY)
-           ========================================== */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #FFFFFF;
-            color: #0F4C5C;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh; /* Ocupa al menos toda la altura de la pantalla */
-        }
-
-        /* ==========================================
-           3. CABECERA (HEADER)
-           ========================================== */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* Enlaces de la barra de navegación */
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            font-weight: 600;
-        }
-
-        /* Efecto al pasar el cursor sobre los enlaces */
-        nav a:hover {
-            color: var(--secondary-color);
-        }
-
-        /* ==========================================
-           4. CONTENIDO PRINCIPAL (MAIN) - CENTRADO Y FLEXIBLE
-           ========================================== */
-        main {
-            flex: 1; /* Hace que este espacio crezca y empuje el footer al fondo si sobra pantalla */
-            padding: 3rem 2rem;
-            max-width: 1000px;
-            width: 100%;
-            margin: 0 auto;
-            text-align: center;
-            box-sizing: border-box;
-        }
-
-        /* ==========================================
-           5. PIE DE PÁGINA (FOOTER) - ESTÁTICO AL FONDO
-           ========================================== */
-        footer {
-            background-color: #0f172a;
-            color: white;
-            text-align: center;
-            padding: 1.5rem 2rem;
-            width: 100%;
-            box-sizing: border-box;
-            /* Ya no necesitamos position: fixed ni transform, ahora forma parte natural del flujo */
-        }
-        /* ==========================================
-           6. AJUSTE DE LA IMAGEN PRINCIPAL
-           ========================================== */
-        .hero-image-container {
-            margin: 2.5rem 0;
-            text-align: center;
-        }
-
-        .main-image {
-            width: 100%;            /* Se adapta al ancho disponible de la pantalla */
-            max-width: 450px;       /* Define el ancho máximo que puede alcanzar (puedes cambiarlo a 400px o 500px según prefieras) */
-            height: auto;           /* Mantiene la proporción original de la imagen para que no se deforme */
-            max-height: 350px;      /* Limita la altura máxima para evitar que sea muy alargada */
-            object-fit: contain;    /* Asegura que toda la imagen completa sea visible dentro del contenedor */
-            border-radius: 12px;    /* Esquinas redondeadas elegantes */
-            box-shadow: 0 4px 12px rgba(15, 76, 92, 0.15); /* Sombra sutil acorde al diseño */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block titulo %}{{ empresa.nombre }}{% endblock %}</title>
+  <meta name="description" content="{% block descripcion %}Plan de saneamiento básico, gestión de calidad y gestión ambiental para restaurantes, bares y panaderías en {{ empresa.ciudad }}.{% endblock %}">
+  <meta property="og:title" content="{{ empresa.nombre }}">
+  <meta property="og:description" content="Prepara tu establecimiento para la visita sanitaria: plan de saneamiento básico según la Resolución 2674 de 2013.">
+  <meta property="og:image" content="{{ url_for('static', filename='img/compartir.jpg', _external=True) }}">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0F4C5C">
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/isotipo.svg') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}?v={{ v }}">
 </head>
 <body>
+  <a class="saltar" href="#contenido">Ir al contenido</a>
 
-   <!-- MENÚ DE NAVIGATION (Pestañas) -->
-    <header>
-        <div style="display: flex; align-items: center; gap: 15px;">
-            <div style="background-color: white; padding: 4px 8px; border-radius: 6px; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
-                <img src="{{ url_for('static', filename='LogoV2.png') }}" alt="Logo de la empresa" style="height: 45px; width: auto; display: block;">
-            </div>
-            <h1 style="font-size: 1.5rem; margin: 0; font-weight: bold; color: white;">{{ empresa.nombre }}</h1>
-        </div>
+  <header class="cabecera">
+    <div class="cabecera__interior">
+      <a class="marca" href="{{ url_for('inicio') }}" aria-label="{{ empresa.nombre }}, inicio">
+        <img src="{{ url_for('static', filename='img/isotipo.svg') }}" alt="" width="46" height="36">
+        <span class="marca__texto"><span class="marca__nombre">El Monarca</span><span class="marca__linea">Soluciones Empresariales</span></span>
+      </a>
+      <nav class="menu" aria-label="Principal">
+        <a href="{{ url_for('inicio') }}" {% if pagina == 'inicio' %}aria-current="page"{% endif %}>Inicio</a>
+        <a href="{{ url_for('servicios') }}" {% if pagina == 'servicios' %}aria-current="page"{% endif %}>Servicios</a>
+        {% if empresa.herramienta_url %}<a href="{{ empresa.herramienta_url }}">Ingresar a la herramienta</a>{% endif %}
+        <a class="boton boton--pequeno" href="{{ empresa.formulario }}" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+  </header>
 
-        <nav>
-            <a href="{{ url_for('inicio') }}">Inicio</a>
-            <a href="{{ url_for('servicios') }}">Servicios</a>
-        </nav>
-    </header>
+  <main id="contenido">
+    {% block content %}{% endblock %}
+  </main>
 
-    <!-- CONTENIDO DINÁMICO -->
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-
-    <!-- PIE DE PÁGINA -->
-    <footer>
-        <p>&copy; 2026 {{ empresa.nombre }}. Todos los derechos reservados.</p>
-    </footer>
-
+  <footer class="pie">
+    <div class="pie__interior">
+      <div>
+        <p class="pie__marca">El Monarca <span>Soluciones Empresariales</span></p>
+        <p>Saneamiento básico, calidad y gestión ambiental para establecimientos gastronómicos. {{ empresa.ciudad }}.</p>
+      </div>
+      <nav aria-label="Pie de página" class="pie__enlaces">
+        <a href="{{ url_for('inicio') }}">Inicio</a>
+        <a href="{{ url_for('servicios') }}">Servicios</a>
+        <a href="{{ empresa.formulario }}" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico</a>
+      </nav>
+    </div>
+    <p class="pie__legal">&copy; 2026 {{ empresa.nombre }}</p>
+  </footer>
 </body>
 </html>

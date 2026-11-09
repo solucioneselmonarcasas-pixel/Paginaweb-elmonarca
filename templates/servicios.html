@@ -1,57 +1,70 @@
 {% extends "base.html" %}
-
+{% block titulo %}Servicios · {{ empresa.nombre }}{% endblock %}
 {% block content %}
-<section style="max-width: 1000px; margin: 0 auto;">
-    
-    <!-- ENCABEZADO DE LA SECCIÓN -->
-    <div style="text-align: center; margin-bottom: 3rem;">
-        <h2 style="font-size: 2.2rem; color: var(--primary-color); margin-bottom: 0.5rem;">
-            Nuestros Servicios Empresariales
-        </h2>
-        <p style="font-size: 1.1rem; color: #64748b;">
-            Ofrecemos soluciones integrales adaptadas a las necesidades normativas y de calidad de tu empresa.
-        </p>
-        <hr style="margin: 1.5rem auto; width: 80px; border: 2px solid var(--secondary-color); border-radius: 2px;">
+
+<section class="encabezado">
+  <div class="encabezado__interior">
+    <h1>Planes de servicio</h1>
+    <p>Cada plan incluye todo lo del anterior. Empieza por lo que exige la norma y crece cuando tu negocio lo necesite.</p>
+  </div>
+</section>
+
+<section class="bloque" aria-label="Planes">
+  <div class="bloque__interior planes">
+    {% for plan in planes %}
+    <article class="plan plan--{{ loop.index }}">
+      <img src="{{ url_for('static', filename='img/' ~ plan.imagen ~ '-480.webp') }}"
+           srcset="{{ url_for('static', filename='img/' ~ plan.imagen ~ '-480.webp') }} 480w, {{ url_for('static', filename='img/' ~ plan.imagen ~ '-960.webp') }} 960w"
+           sizes="(max-width: 760px) 90vw, 330px" width="480" height="720"
+           {% if not loop.first %}loading="lazy"{% endif %} decoding="async" alt="Ilustración del {{ plan.titulo | lower }}">
+      <div class="plan__texto">
+        <p class="plan__nivel">Plan {{ loop.index }} de 3</p>
+        <h2>{{ plan.titulo }}</h2>
+        <p>{{ plan.resumen }}</p>
+        <a class="boton {{ '' if loop.first else 'boton--secundario' }}" href="{{ empresa.formulario }}" target="_blank" rel="noopener noreferrer">Solicitar este plan</a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="bloque bloque--tenue" aria-labelledby="comparar-titulo">
+  <div class="bloque__interior">
+    <h2 id="comparar-titulo">Qué incluye cada plan</h2>
+    <div class="tabla-envoltura">
+      <table class="comparacion">
+        <thead>
+          <tr>
+            <th scope="col">Componente</th>
+            <th scope="col">Saneamiento</th>
+            <th scope="col">Calidad</th>
+            <th scope="col">Ambiental</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for nombre, desde in componentes %}
+          {% if loop.first or componentes[loop.index0 - 1][1] != desde %}
+          <tr class="grupo"><th scope="rowgroup" colspan="4">
+            {{ 'Plan de saneamiento básico (Res. 2674 de 2013)' if desde == 1 else 'Gestión de calidad' if desde == 2 else 'Gestión ambiental' }}</th></tr>
+          {% endif %}
+          <tr>
+            <th scope="row">{{ nombre }}</th>
+            {% for n in range(1, 4) %}
+            <td>{% if n >= desde %}<svg class="incluido" viewBox="0 0 24 24" role="img" aria-label="Incluido"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>{% else %}<span class="no-incluido" aria-label="No incluido">—</span>{% endif %}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
     </div>
+  </div>
+</section>
 
-    <!-- CONTENEDOR DE TARJETAS DE SERVICIOS -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 1.5rem; align-items: stretch;">
-        {% for servicio in servicios %}
-            <div style="background-color: white; border-radius: 10px; padding: 1.8rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); border-top: 5px solid var(--primary-color); display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s ease;">
-                
-                <div>
-                    <!-- CONTENEDOR DE LA IMAGEN (Tamaño aumentado a 400px) -->
-                    {% if servicio.imagen %}
-                    <div style="margin-bottom: 1.2rem; text-align: center; width: 100%; height: 400px; overflow: hidden; border-radius: 8px; background-color: #f8fafc; display: flex; align-items: center; justify-content: center; padding: 10px; box-sizing: border-box;">
-                        <img src="{{ url_for('static', filename=servicio.imagen) }}" 
-                             alt="{{ servicio.titulo }}" 
-                             style="max-width: 100%; max-height: 100%; object-fit: contain; display: block;">
-                    </div>
-                    {% endif %}
-
-                    <!-- TÍTULO DEL SERVICIO -->
-                    <h3 style="color: var(--primary-color); margin-top: 0; font-size: 1.3rem;">
-                        {{ servicio.titulo }}
-                    </h3>
-                    
-                    <!-- DESCRIPCIÓN DEL SERVICIO -->
-                    <p style="color: #475569; line-height: 1.6; font-size: 0.95rem;">
-                        {{ servicio.descripcion }}
-                    </p>
-                </div>
-
-                <!-- BOTÓN / ENLACE AL FORMULARIO DE GOOGLE FORMS -->
-                <div style="text-align: center; margin-top: auto; border-top: 1px solid #f1f5f9; padding-top: 1.2rem;">
-                    <a href="https://forms.gle/pNUa2vyz7UVZYxSu7" 
-                       target="_blank" 
-                       style="display: inline-block; background-color: var(--secondary-color); color: white; padding: 0.6rem 1.2rem; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); transition: opacity 0.2s;">
-                        ¡Me interesa! Regístranos tu solicitud aquí
-                    </a>
-                </div>
-
-            </div>
-        {% endfor %}
-    </div>
-
+<section class="cierre">
+  <div class="cierre__interior">
+    <h2>¿No sabes cuál plan necesitas?</h2>
+    <p>Empezamos con un diagnóstico y te recomendamos el plan según lo que encontremos.</p>
+    <a class="boton" href="{{ empresa.formulario }}" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico</a>
+  </div>
 </section>
 {% endblock %}

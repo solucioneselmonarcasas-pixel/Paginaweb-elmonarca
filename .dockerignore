@@ -1,0 +1,5 @@
+.git
+originales
+__pycache__
+*.pyc
+README.md

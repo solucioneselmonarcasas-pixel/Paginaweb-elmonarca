@@ -1,0 +1,222 @@
+/* ==========================================================
+   El Monarca · Soluciones Empresariales
+   Paleta y tipografía según el manual de marca:
+   azul petróleo (ancla), naranja monarca (acento), gris grafito (texto).
+   ========================================================== */
+:root {
+  --petroleo: #0F4C5C;
+  --petroleo-hondo: #0A3642;
+  --naranja: #F28C28;
+  --grafito: #2F3542;
+  --gris: #5B6470;
+  --tenue: #E9F1F2;
+  --linea: #D2DFE2;
+  --blanco: #FFFFFF;
+
+  --ancho: 1120px;
+  --radio: 10px;
+  --fuente: "Montserrat", "Segoe UI", system-ui, sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  font-size: 1.0625rem;            /* 17 px */
+  line-height: 1.6;
+  color: var(--grafito);
+  background: var(--blanco);
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--petroleo); }
+h1, h2, h3 { line-height: 1.15; margin: 0 0 .6em; color: var(--petroleo); }
+h1 { font-size: clamp(2.1rem, 4.6vw, 3.35rem); font-weight: 700; letter-spacing: -.02em; }
+h2 { font-size: clamp(1.55rem, 2.6vw, 2rem); font-weight: 600; letter-spacing: -.01em; }
+h3 { font-size: 1.15rem; font-weight: 600; }
+p { margin: 0 0 1em; max-width: 64ch; }
+
+:focus-visible { outline: 3px solid var(--naranja); outline-offset: 3px; border-radius: 4px; }
+.saltar { position: absolute; left: -999px; top: .5rem; background: var(--blanco); padding: .5rem 1rem; z-index: 10; }
+.saltar:focus { left: .5rem; }
+.oculto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ---------- Botones ---------- */
+.boton {
+  display: inline-block;
+  background: var(--naranja);
+  color: var(--grafito);                 /* contraste AA sobre naranja */
+  font-weight: 600;
+  text-decoration: none;
+  padding: .85rem 1.4rem;
+  border-radius: 8px;
+  border: 2px solid var(--naranja);
+  line-height: 1.2;
+}
+.boton:hover { background: #F59D45; border-color: #F59D45; }
+.boton--secundario { background: transparent; color: var(--petroleo); border-color: var(--petroleo); }
+.boton--secundario:hover { background: var(--tenue); border-color: var(--petroleo); }
+.boton--pequeno { padding: .55rem 1rem; font-size: .9rem; }
+.acciones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
+
+/* ---------- Cabecera ---------- */
+.cabecera { background: var(--blanco); border-bottom: 1px solid var(--linea); }
+.cabecera__interior {
+  max-width: var(--ancho); margin: 0 auto; padding: .85rem 1.5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+}
+.marca { display: flex; align-items: center; gap: .7rem; text-decoration: none; color: var(--grafito); }
+.marca img { width: 46px; height: auto; }
+.marca__texto { display: flex; flex-direction: column; line-height: 1.1; }
+/* Manual de marca: nombre en caja alta SemiBold; línea secundaria Light con interletrado amplio */
+.marca__nombre { text-transform: uppercase; font-weight: 600; letter-spacing: .08em; font-size: 1.05rem; }
+.marca__linea { font-weight: 300; letter-spacing: .22em; font-size: .62rem; text-transform: uppercase; color: var(--gris); }
+.menu { display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; }
+.menu a:not(.boton) { text-decoration: none; font-weight: 500; color: var(--grafito); padding: .25rem 0; border-bottom: 2px solid transparent; }
+.menu a:not(.boton):hover { color: var(--petroleo); }
+.menu a[aria-current="page"] { color: var(--petroleo); border-bottom-color: var(--naranja); }
+
+/* ---------- Portada ---------- */
+.portada { background: var(--petroleo); color: var(--blanco); }
+.portada__interior {
+  max-width: var(--ancho); margin: 0 auto; padding: clamp(3rem, 7vw, 5.5rem) 1.5rem;
+  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center;
+}
+.portada h1 { color: var(--blanco); max-width: 15ch; }
+.portada__entrada { font-size: 1.15rem; color: #D5E5E8; max-width: 46ch; }
+.portada .boton--secundario { color: var(--blanco); border-color: rgba(255, 255, 255, .6); }
+.portada .boton--secundario:hover { background: rgba(255, 255, 255, .1); border-color: var(--blanco); }
+
+/* El acta: hoja de revisión con los cuatro programas */
+.acta {
+  background: var(--blanco); color: var(--grafito);
+  border-radius: 6px; border-top: 8px solid var(--naranja);
+  box-shadow: 0 24px 48px -20px rgba(4, 25, 31, .55);
+  padding: 1.6rem 1.6rem 1.3rem;
+}
+.acta__cabeza { border-bottom: 2px solid var(--grafito); padding-bottom: .8rem; margin-bottom: .4rem; }
+.acta__titulo { font-weight: 700; font-size: 1.2rem; color: var(--petroleo); margin: 0; }
+.acta__norma { font-size: .85rem; color: var(--gris); margin: .2rem 0 0; }
+.acta__lista { list-style: none; margin: 0; padding: 0; }
+.acta__lista li {
+  display: grid; grid-template-columns: 30px 1fr; gap: .9rem; align-items: start;
+  padding: .85rem 0; border-bottom: 1px dashed var(--linea);
+}
+.acta__lista strong { display: block; color: var(--grafito); font-size: 1rem; }
+.acta__lista span { font-size: .86rem; line-height: 1.45; color: var(--gris); }
+.acta__pie { font-size: .82rem; color: var(--gris); margin: .9rem 0 0; }
+
+.chulo { width: 30px; height: 30px; margin-top: .1rem; }
+.chulo rect { fill: none; stroke: var(--petroleo); stroke-width: 1.6; }
+.chulo path {
+  fill: none; stroke: var(--naranja); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 20; stroke-dashoffset: 0;
+}
+/* Única animación de la página: los chulos se marcan uno a uno */
+@media (prefers-reduced-motion: no-preference) {
+  .chulo path { stroke-dashoffset: 20; animation: marcar .45s ease-out forwards; }
+  .acta__lista li:nth-child(1) .chulo path { animation-delay: .5s; }
+  .acta__lista li:nth-child(2) .chulo path { animation-delay: .9s; }
+  .acta__lista li:nth-child(3) .chulo path { animation-delay: 1.3s; }
+  .acta__lista li:nth-child(4) .chulo path { animation-delay: 1.7s; }
+}
+@keyframes marcar { to { stroke-dashoffset: 0; } }
+
+/* ---------- Bloques de contenido ---------- */
+.bloque { padding: clamp(3rem, 7vw, 5rem) 0; }
+.bloque__interior { max-width: var(--ancho); margin: 0 auto; padding: 0 1.5rem; }
+.bloque__entrada { color: var(--gris); font-size: 1.08rem; margin-bottom: 2.5rem; }
+.bloque--tenue { background: var(--tenue); }
+.bloque--oscuro { background: var(--petroleo-hondo); color: #D5E5E8; }
+.bloque--oscuro h3 { color: var(--blanco); }
+
+.programas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem 1.75rem; }
+.programa { margin: 0; }
+.programa img { border-radius: var(--radio); aspect-ratio: 1; width: 100%; object-fit: cover; margin-bottom: 1rem; }
+.programa strong { display: block; color: var(--petroleo); font-size: 1.05rem; margin-bottom: .3rem; }
+.programa figcaption { font-size: .93rem; line-height: 1.5; color: var(--gris); }
+
+/* Proceso: es una secuencia real, por eso va numerado y unido por una línea */
+.pasos { list-style: none; counter-reset: paso; margin: 2rem 0 0; padding: 0;
+         display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.75rem; position: relative; }
+.pasos::before { content: ""; position: absolute; top: 21px; left: 22px; right: calc((100% - 5.25rem) / 4 - 22px); height: 2px; background: var(--linea); }
+.pasos li { counter-increment: paso; position: relative; font-size: .95rem; color: var(--gris); line-height: 1.5; }
+.pasos li::before {
+  content: counter(paso); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--blanco); border: 2px solid var(--petroleo); color: var(--petroleo); font-weight: 700;
+  margin-bottom: 1rem; position: relative;
+}
+.pasos strong { display: block; color: var(--grafito); font-size: 1.05rem; margin-bottom: .25rem; }
+
+.proposito { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+.proposito p { font-size: 1.05rem; }
+
+.cierre { border-top: 1px solid var(--linea); }
+.cierre__interior { max-width: var(--ancho); margin: 0 auto; padding: clamp(3rem, 6vw, 4.5rem) 1.5rem;
+                    display: grid; grid-template-columns: 1fr auto; gap: .25rem 2rem; align-items: center; }
+.cierre h2 { margin-bottom: .3rem; }
+.cierre p { color: var(--gris); margin: 0; }
+.cierre .boton { grid-column: 2; grid-row: 1 / span 2; }
+
+/* ---------- Servicios ---------- */
+.encabezado { background: var(--petroleo); color: #D5E5E8; }
+.encabezado__interior { max-width: var(--ancho); margin: 0 auto; padding: clamp(2.5rem, 6vw, 4rem) 1.5rem; }
+.encabezado h1 { color: var(--blanco); }
+.encabezado p { font-size: 1.12rem; }
+
+/* Los planes suben como escalones: cada uno contiene al anterior */
+.planes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; align-items: start; }
+.plan--1 { margin-top: 5rem; }
+.plan--2 { margin-top: 2.5rem; }
+.plan img { border-radius: var(--radio); width: 100%; background: var(--tenue); }
+.plan__texto { padding-top: 1.25rem; }
+.plan__nivel { font-size: .85rem; font-weight: 600; color: var(--naranja); margin: 0 0 .3rem; filter: brightness(.82); }
+.plan h2 { font-size: 1.35rem; margin-bottom: .45rem; }
+.plan p { color: var(--gris); font-size: .97rem; }
+
+.tabla-envoltura { overflow-x: auto; margin-top: 1.5rem; }
+.comparacion { width: 100%; border-collapse: collapse; background: var(--blanco); font-size: .97rem; min-width: 560px; }
+.comparacion thead th { background: var(--petroleo); color: var(--blanco); font-weight: 600; padding: .9rem 1rem; text-align: center; }
+.comparacion thead th:first-child { text-align: left; }
+.comparacion tbody th { text-align: left; font-weight: 500; padding: .75rem 1rem; }
+.comparacion td { text-align: center; padding: .75rem 1rem; width: 17%; }
+.comparacion tbody tr { border-bottom: 1px solid var(--linea); }
+.comparacion .grupo th { background: #F5F9F9; color: var(--petroleo); font-weight: 700; font-size: .88rem; padding-top: 1rem; }
+.incluido { width: 24px; height: 24px; fill: none; stroke: var(--naranja); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; }
+.no-incluido { color: #A9B4B8; }
+
+/* ---------- Pie ---------- */
+.pie { background: var(--grafito); color: #C9CED5; font-size: .93rem; }
+.pie__interior { max-width: var(--ancho); margin: 0 auto; padding: 2.5rem 1.5rem 1.5rem;
+                 display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.pie__marca { color: var(--blanco); font-weight: 600; text-transform: uppercase; letter-spacing: .08em; margin-bottom: .4rem; }
+.pie__marca span { font-weight: 300; letter-spacing: .18em; font-size: .7rem; margin-left: .4rem; color: #C9CED5; }
+.pie__enlaces { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: flex-start; }
+.pie a { color: var(--blanco); text-decoration: none; }
+.pie a:hover { text-decoration: underline; }
+.pie__legal { width: min(calc(100% - 3rem), calc(var(--ancho) - 3rem)); margin: 0 auto; padding: 1rem 0 2rem; font-size: .8rem; border-top: 1px solid #454C59; }
+
+/* ---------- Pantallas medianas y celulares ---------- */
+@media (max-width: 960px) {
+  .portada__interior { grid-template-columns: 1fr; }
+  .programas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pasos::before { display: none; }
+  .planes { grid-template-columns: 1fr; max-width: 480px; }
+  .plan--1, .plan--2 { margin-top: 0; }
+}
+@media (max-width: 600px) {
+  body { font-size: 1rem; }
+  .menu { gap: 1rem; width: 100%; }
+  .menu .boton { margin-left: auto; }
+  .acta { padding: 1.2rem; }
+  .pasos { grid-template-columns: 1fr; }
+  .proposito { grid-template-columns: 1fr; gap: 1.5rem; }
+  .cierre__interior { grid-template-columns: 1fr; }
+  .cierre .boton { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 1rem; }
+  .comparacion { min-width: 0; font-size: .86rem; }
+  .comparacion thead th { font-size: .72rem; padding: .7rem .3rem; }
+  .comparacion tbody th { padding: .65rem .5rem; }
+  .comparacion td { padding: .65rem .2rem; width: 19%; }
+  .incluido { width: 20px; height: 20px; }
+}

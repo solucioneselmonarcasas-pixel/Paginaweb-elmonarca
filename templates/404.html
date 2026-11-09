@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block titulo %}Página no encontrada · {{ empresa.nombre }}{% endblock %}
+{% block content %}
+<section class="encabezado">
+  <div class="encabezado__interior">
+    <h1>Esta página no existe</h1>
+    <p>Puede que el enlace esté mal escrito o que la página haya cambiado de lugar.</p>
+    <p><a class="boton" href="{{ url_for('inicio') }}">Ir al inicio</a></p>
+  </div>
+</section>
+{% endblock %}
