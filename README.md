@@ -21,6 +21,9 @@ Variable opcional en Render → Environment:
 - `static/css/estilos.css`: colores (manual de marca), tipografía y diseño.
 - `static/img/`: imágenes en WebP (versión pequeña y grande de cada una).
   Para cambiar una imagen, genera las dos versiones y sube `VERSION_ESTATICOS` en `app.py`.
+- `datos/profesionales.json`: equipo de la página Conócenos. Una entrada por profesional
+  (nombre, cargo, resumen corto, resumen, experiencia, formación, LinkedIn); el orden de la
+  lista es el de la página. Para la foto: `python scripts/preparar_foto.py foto.jpg <slug>`.
 - `originales/`: imágenes PNG originales (no se publican).
 
 ## Seguridad incluida

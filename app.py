@@ -5,7 +5,9 @@ En producción se ejecuta con Gunicorn (ver Dockerfile), nunca con el servidor
 de desarrollo de Flask. Para probar en tu equipo:
     python app.py              -> http://127.0.0.1:5000
 """
+import json
 import os
+from pathlib import Path
 
 from flask import Flask, render_template, request
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -17,7 +19,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 # Los archivos estáticos (CSS, imágenes) se guardan en caché del navegador 7 días.
 # Si cambias una imagen o el CSS, sube el número de VERSION_ESTATICOS para forzar la recarga.
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 7
-VERSION_ESTATICOS = "3"
+VERSION_ESTATICOS = "5"
 
 # ==========================================
 # DATOS DE LA EMPRESA (se repiten en toda la web)
@@ -65,6 +67,27 @@ COMPONENTES = [
     ("Control de consumo de agua y energía", 3),
     ("Buenas prácticas ambientales", 3),
 ]
+
+
+# Profesionales del equipo (página Conócenos). Se editan en datos/profesionales.json:
+# una entrada por profesional; agregar o quitar personas no requiere tocar el código.
+# Fotos: static/img/profesionales/<slug>-320.webp y <slug>-640.webp (scripts/preparar_foto.py).
+# Si un profesional aún no tiene foto se muestran sus iniciales.
+BASE = Path(__file__).resolve().parent
+CARPETA_FOTOS = BASE / "static" / "img" / "profesionales"
+
+
+def cargar_profesionales() -> list[dict]:
+    datos = json.loads((BASE / "datos" / "profesionales.json").read_text(encoding="utf-8"))
+    lista = []
+    for p in datos.get("profesionales", []):
+        if not p.get("nombre") or not p.get("slug"):
+            continue
+        p["hay_foto"] = (CARPETA_FOTOS / f"{p['slug']}-320.webp").exists()
+        partes = p["nombre"].split()
+        p["iniciales"] = (partes[0][0] + (partes[1][0] if len(partes) > 1 else "")).upper()
+        lista.append(p)
+    return lista
 
 
 # ==========================================
@@ -115,6 +138,11 @@ def inicio():
 @app.route("/servicios")
 def servicios():
     return render_template("servicios.html", planes=PLANES, componentes=COMPONENTES, pagina="servicios")
+
+
+@app.route("/conocenos")
+def conocenos():
+    return render_template("conocenos.html", profesionales=cargar_profesionales(), pagina="conocenos")
 
 
 @app.errorhandler(404)

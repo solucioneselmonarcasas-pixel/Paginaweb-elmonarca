@@ -1,0 +1,65 @@
+{
+  "nombre": "Jhonathan Martínez Daza",
+  "cargo": "Ingeniero de Alimentos, magíster en Calidad y Gestión Integral",
+  "ciudad": "Bogotá, Colombia",
+  "resumen": [
+    "Especialista y magíster de la Universidad Santo Tomás en convenio con ICONTEC, con más de 9 años de experiencia en planificación, auditoría e implementación de sistemas de gestión de calidad (ISO 9001, ISO 14001, HACCP), inocuidad alimentaria, sostenibilidad y estandarización de procesos.",
+    "Ha liderado proyectos de normalización para el sector de gastronomía y bares, el control de calidad en retail y consumo masivo, y la capacitación de empresarios, con niveles de satisfacción superiores al 92 %. Integra herramientas tecnológicas y Python para analizar datos de calidad y automatizar procesos."
+  ],
+  "experiencia": [
+    {
+      "cargo": "Asesor de implementación de la NTC 6496 (sostenibilidad para gastronomía y bares)",
+      "empresa": "ASOBARES",
+      "periodo": "Agosto 2026 – actual"
+    },
+    {
+      "cargo": "Profesional especializado en calidad",
+      "empresa": "Fondo Nacional de Turismo FONTUR – MinCIT",
+      "periodo": "Agosto 2023 – junio 2026"
+    },
+    {
+      "cargo": "Profesional de calidad",
+      "empresa": "Instituto Distrital de Turismo de Bogotá",
+      "periodo": "Marzo – junio 2023"
+    },
+    {
+      "cargo": "Profesional de calidad",
+      "empresa": "Fondo Nacional de Turismo FONTUR – MinCIT",
+      "periodo": "Noviembre 2021 – febrero 2023"
+    },
+    {
+      "cargo": "Profesional de calidad, operaciones y ventas",
+      "empresa": "Cencosud Colombia S.A.",
+      "periodo": "Enero 2017 – octubre 2021"
+    }
+  ],
+  "formacion": [
+    {
+      "titulo": "Maestría en Calidad y Gestión Integral",
+      "institucion": "Universidad Santo Tomás – ICONTEC",
+      "periodo": "2020"
+    },
+    {
+      "titulo": "Especialización en Administración y Gerencia de Sistemas de Calidad",
+      "institucion": "Universidad Santo Tomás – ICONTEC",
+      "periodo": "2019"
+    },
+    {
+      "titulo": "Ingeniería de Alimentos",
+      "institucion": "Fundación Universitaria Agraria de Colombia",
+      "periodo": "2017"
+    },
+    {
+      "titulo": "Ingeniería de Sistemas (en curso)",
+      "institucion": "Universidad INCCA de Colombia",
+      "periodo": ""
+    },
+    {
+      "titulo": "Auditor interno de calidad NTC-ISO 9001",
+      "institucion": "SENA",
+      "periodo": "2023"
+    }
+  ],
+  "linkedin": "https://www.linkedin.com/in/jhonathan-mart%C3%ADnez-daza-223134262",
+  "foto": "perfil"
+}

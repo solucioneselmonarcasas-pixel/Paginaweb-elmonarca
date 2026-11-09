@@ -29,6 +29,7 @@
       <nav class="menu" aria-label="Principal">
         <a href="{{ url_for('inicio') }}" {% if pagina == 'inicio' %}aria-current="page"{% endif %}>Inicio</a>
         <a href="{{ url_for('servicios') }}" {% if pagina == 'servicios' %}aria-current="page"{% endif %}>Servicios</a>
+        <a href="{{ url_for('conocenos') }}" {% if pagina == 'conocenos' %}aria-current="page"{% endif %}>Conócenos</a>
         {% if empresa.herramienta_url %}<a href="{{ empresa.herramienta_url }}">Ingresar a la herramienta</a>{% endif %}
         <a class="boton boton--pequeno" href="{{ empresa.formulario }}" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico</a>
       </nav>
@@ -48,6 +49,7 @@
       <nav aria-label="Pie de página" class="pie__enlaces">
         <a href="{{ url_for('inicio') }}">Inicio</a>
         <a href="{{ url_for('servicios') }}">Servicios</a>
+        <a href="{{ url_for('conocenos') }}">Conócenos</a>
         <a href="{{ empresa.formulario }}" target="_blank" rel="noopener noreferrer">Solicitar diagnóstico</a>
       </nav>
     </div>

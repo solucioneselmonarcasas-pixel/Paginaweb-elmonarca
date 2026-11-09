@@ -185,6 +185,52 @@ p { margin: 0 0 1em; max-width: 64ch; }
 .incluido { width: 24px; height: 24px; fill: none; stroke: var(--naranja); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; vertical-align: middle; }
 .no-incluido { color: #A9B4B8; }
 
+/* ---------- Conócenos ---------- */
+.proposito--claro { color: var(--grafito); }
+.proposito--claro > div { border-left: 4px solid var(--naranja); padding-left: 1.25rem; }
+.proposito--claro h3 { margin-bottom: .4rem; }
+.proposito--claro p { font-size: 1.12rem; margin: 0; }
+
+/* Equipo: una tarjeta por profesional; crece sola cuando se agregan más */
+.equipo { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2.5rem 2rem; align-items: start; }
+.profesional { display: grid; gap: 1.1rem; }
+.profesional__foto img, .profesional__iniciales {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radio); border-bottom: 6px solid var(--naranja);
+}
+.profesional__iniciales { background: var(--petroleo); color: var(--blanco); display: grid; place-items: center;
+                          font-size: 4rem; font-weight: 300; letter-spacing: .08em; }
+.profesional h3 { font-size: 1.35rem; margin-bottom: .25rem; }
+.profesional__cargo { font-weight: 500; color: var(--grafito); margin-bottom: .6rem; }
+.profesional__resumen { color: var(--grafito); font-size: 1rem; font-weight: 500; margin-top: .2rem; }
+.profesional__enlace { display: inline-block; font-size: .92rem; font-weight: 500; margin: .6rem 0 .4rem; }
+
+/* Con un solo profesional la tarjeta se muestra horizontal y aprovecha el ancho */
+.profesional:only-child { grid-column: 1 / -1; grid-template-columns: 300px minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 3.5rem); max-width: 980px; }
+
+.profesional__detalle { border-top: 1px solid var(--linea); border-bottom: 1px solid var(--linea); margin-top: .4rem; }
+.profesional__detalle summary {
+  cursor: pointer; list-style: none; padding: .8rem 0; font-weight: 600; color: var(--petroleo);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.profesional__detalle summary::-webkit-details-marker { display: none; }
+.profesional__detalle summary::after {
+  content: ""; width: 9px; height: 9px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg); margin-right: .3rem; transition: transform .2s ease;
+}
+.profesional__detalle[open] summary::after { transform: rotate(-135deg); }
+.profesional__detalle[open] summary { color: var(--grafito); }
+@media (prefers-reduced-motion: reduce) { .profesional__detalle summary::after { transition: none; } }
+.profesional__cuerpo { padding-bottom: .5rem; font-size: .96rem; }
+.profesional__cuerpo h4 { font-size: 1rem; color: var(--petroleo); margin: 1.4rem 0 .7rem; }
+
+.trayectoria { list-style: none; margin: 0 0 .5rem; padding: 0; border-left: 2px solid var(--linea); }
+.trayectoria li { padding: 0 0 1rem 1.25rem; position: relative; display: flex; flex-direction: column; }
+.trayectoria li::before { content: ""; position: absolute; left: -7px; top: .45rem; width: 12px; height: 12px;
+                          border-radius: 50%; background: var(--blanco); border: 2px solid var(--petroleo); }
+.trayectoria strong { color: var(--grafito); }
+.trayectoria span { color: var(--gris); font-size: .93rem; }
+.trayectoria__periodo { font-size: .84rem !important; }
+
 /* ---------- Pie ---------- */
 .pie { background: var(--grafito); color: #C9CED5; font-size: .93rem; }
 .pie__interior { max-width: var(--ancho); margin: 0 auto; padding: 2.5rem 1.5rem 1.5rem;
@@ -203,6 +249,8 @@ p { margin: 0 0 1em; max-width: 64ch; }
   .pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pasos::before { display: none; }
   .planes { grid-template-columns: 1fr; max-width: 480px; }
+  .profesional:only-child { grid-template-columns: 1fr; }
+  .profesional__foto { max-width: 320px; }
   .plan--1, .plan--2 { margin-top: 0; }
 }
 @media (max-width: 600px) {
