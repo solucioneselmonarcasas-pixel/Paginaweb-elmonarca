@@ -39,7 +39,7 @@ PROGRAMAS = [
     {"nombre": "Limpieza y desinfección", "imagen": "limpieza", "evidencia": "Manual, cronograma anual y registro diario",
      "detalle": "Procedimientos por área, sustancias y diluciones, cronograma anual y registro diario."},
     {"nombre": "Control de plagas", "imagen": "plagas", "evidencia": "Proveedor con concepto sanitario e inspecciones",
-     "detalle": "Barreras físicas, métodos activos, proveedor certificado, inspecciones y cronograma."},
+     "detalle": "Metodos pasivos, métodos activos, proveedor certificado, inspecciones y cronograma."},
     {"nombre": "Gestión de residuos", "imagen": "residuos", "evidencia": "Separación en la fuente, ruta y gestores",
      "detalle": "Separación en la fuente por colores, acopio, ruta interna y gestores autorizados."},
     {"nombre": "Abastecimiento de agua potable", "imagen": "agua", "evidencia": "Registro de pH y cloro, limpieza del tanque",
@@ -52,7 +52,7 @@ PLANES = [
      "resumen": "Lo que exige la norma para obtener y mantener el concepto sanitario favorable."},
     {"clave": "calidad", "titulo": "Saneamiento + gestión de calidad", "imagen": "calidad",
      "resumen": "Suma estándares para tus productos y la medición de lo que piensan tus clientes."},
-    {"clave": "ambiental", "titulo": "Calidad + gestión ambiental", "imagen": "ambiental",
+    {"clave": "ambiental", "titulo": "Programa de saneamiento básico + Calidad + gestión ambiental", "imagen": "ambiental",
      "resumen": "Suma buenas prácticas ambientales y control de consumos de agua y energía."},
 ]
 COMPONENTES = [
