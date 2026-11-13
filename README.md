@@ -20,6 +20,8 @@ Variable opcional en Render → Environment:
 - `app.py` → `EMPRESA_INFO`: número de WhatsApp (`whatsapp`, solo dígitos con el 57), cómo se muestra
   (`whatsapp_visible`) y el mensaje que aparece escrito al abrir el chat (`whatsapp_mensaje`).
   El botón «Escríbenos» queda fijo abajo a la derecha en todas las páginas y el número también sale en el pie.
+  Logo de WhatsApp: descargar el oficial de https://www.meta.com/brand/resources/whatsapp/whatsapp-brand/ y
+  guardarlo sin modificar como `static/img/whatsapp.svg` (o `.png`); el botón lo usa solo. Sin ese archivo, muestra una burbuja de chat.
 - `templates/`: estructura de las páginas.
 - `static/css/estilos.css`: colores (manual de marca), tipografía y diseño.
 - `static/img/`: imágenes en WebP (versión pequeña y grande de cada una).

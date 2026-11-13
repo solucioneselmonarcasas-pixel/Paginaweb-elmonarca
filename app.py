@@ -20,7 +20,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 # Los archivos estáticos (CSS, imágenes) se guardan en caché del navegador 7 días.
 # Si cambias una imagen o el CSS, sube el número de VERSION_ESTATICOS para forzar la recarga.
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 7
-VERSION_ESTATICOS = "6"
+VERSION_ESTATICOS = "7"
 
 # ==========================================
 # DATOS DE LA EMPRESA (se repiten en toda la web)
@@ -42,6 +42,18 @@ EMPRESA_INFO = {
 # Enlace oficial de WhatsApp «clic para chatear» (abre la app en el celular o WhatsApp Web en el computador)
 EMPRESA_INFO["whatsapp_url"] = (f"https://wa.me/{EMPRESA_INFO['whatsapp']}?text="
                                 + quote(EMPRESA_INFO["whatsapp_mensaje"]))
+
+
+def logo_whatsapp() -> str:
+    """
+    Logo oficial de WhatsApp para el botón «Escríbenos». Se descarga de los recursos de marca de Meta
+    (https://www.meta.com/brand/resources/whatsapp/whatsapp-brand/) y se guarda sin modificar como
+    static/img/whatsapp.svg o static/img/whatsapp.png. Si no está, el botón muestra una burbuja de chat.
+    """
+    for nombre in ("whatsapp.svg", "whatsapp.png"):
+        if (Path(__file__).resolve().parent / "static" / "img" / nombre).exists():
+            return f"img/{nombre}"
+    return ""
 
 # Los cuatro programas que exige la Resolución 2674 de 2013 (imagen = nombre base en static/img)
 PROGRAMAS = [
@@ -133,7 +145,7 @@ def cabeceras_seguridad(respuesta):
 
 @app.context_processor
 def datos_globales():
-    return {"empresa": EMPRESA_INFO, "v": VERSION_ESTATICOS}
+    return {"empresa": EMPRESA_INFO, "v": VERSION_ESTATICOS, "logo_whatsapp": logo_whatsapp()}
 
 
 # ==========================================

@@ -280,6 +280,9 @@ p { margin: 0 0 1em; max-width: 64ch; }
 .whatsapp:hover { background: #179247; }
 .whatsapp:focus-visible { outline-color: var(--naranja); }
 .whatsapp__icono { flex: none; }
+/* Logo oficial (sin modificar) sobre un círculo blanco para que no se pierda en el verde del botón */
+.whatsapp__logo { flex: none; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--blanco); }
+.whatsapp__logo img { width: 26px; height: 26px; }
 .pie { padding-bottom: 4.5rem; }   /* que el botón no tape el pie al llegar al final */
 @media (max-width: 600px) {
   .whatsapp { right: .9rem; bottom: .9rem; padding: .85rem; }
