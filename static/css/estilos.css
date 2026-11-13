@@ -268,3 +268,21 @@ p { margin: 0 0 1em; max-width: 64ch; }
   .comparacion td { padding: .65rem .2rem; width: 19%; }
   .incluido { width: 20px; height: 20px; }
 }
+
+/* ---------- Contacto por WhatsApp (botón fijo) ---------- */
+.whatsapp {
+  position: fixed; right: 1.25rem; bottom: 1.25rem; z-index: 20;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .75rem 1.15rem .75rem .9rem; border-radius: 999px;
+  background: #1FAF55; color: var(--blanco); text-decoration: none; font-weight: 600; font-size: .98rem;
+  box-shadow: 0 6px 18px rgba(15, 76, 92, .28);
+}
+.whatsapp:hover { background: #179247; }
+.whatsapp:focus-visible { outline-color: var(--naranja); }
+.whatsapp__icono { flex: none; }
+.pie { padding-bottom: 4.5rem; }   /* que el botón no tape el pie al llegar al final */
+@media (max-width: 600px) {
+  .whatsapp { right: .9rem; bottom: .9rem; padding: .85rem; }
+  .whatsapp__texto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+}
+@media print { .whatsapp { display: none; } }

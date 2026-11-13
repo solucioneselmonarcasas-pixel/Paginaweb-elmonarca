@@ -8,6 +8,7 @@ de desarrollo de Flask. Para probar en tu equipo:
 import json
 import os
 from pathlib import Path
+from urllib.parse import quote
 
 from flask import Flask, render_template, request
 from werkzeug.middleware.proxy_fix import ProxyFix
@@ -19,7 +20,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 # Los archivos estáticos (CSS, imágenes) se guardan en caché del navegador 7 días.
 # Si cambias una imagen o el CSS, sube el número de VERSION_ESTATICOS para forzar la recarga.
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 7
-VERSION_ESTATICOS = "5"
+VERSION_ESTATICOS = "6"
 
 # ==========================================
 # DATOS DE LA EMPRESA (se repiten en toda la web)
@@ -32,7 +33,15 @@ EMPRESA_INFO = {
     # Cuando la herramienta digital esté publicada, pon aquí su dirección y aparecerá
     # el botón «Ingresar a la herramienta» en el menú. Vacío = no se muestra.
     "herramienta_url": os.getenv("HERRAMIENTA_URL", ""),
+    # Contacto por WhatsApp: número con indicativo de país, solo dígitos (sin +, espacios ni guiones)
+    "whatsapp": "573144347001",
+    "whatsapp_visible": "+57 314 434 7001",
+    # Mensaje que aparece escrito al abrir el chat (la persona lo puede cambiar antes de enviarlo)
+    "whatsapp_mensaje": "Hola, quiero información sobre los servicios de El Monarca Soluciones Empresariales.",
 }
+# Enlace oficial de WhatsApp «clic para chatear» (abre la app en el celular o WhatsApp Web en el computador)
+EMPRESA_INFO["whatsapp_url"] = (f"https://wa.me/{EMPRESA_INFO['whatsapp']}?text="
+                                + quote(EMPRESA_INFO["whatsapp_mensaje"]))
 
 # Los cuatro programas que exige la Resolución 2674 de 2013 (imagen = nombre base en static/img)
 PROGRAMAS = [

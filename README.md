@@ -17,6 +17,9 @@ Variable opcional en Render → Environment:
 
 ## Dónde cambiar qué
 - `app.py`: textos de programas, planes y la tabla comparativa; enlace del formulario.
+- `app.py` → `EMPRESA_INFO`: número de WhatsApp (`whatsapp`, solo dígitos con el 57), cómo se muestra
+  (`whatsapp_visible`) y el mensaje que aparece escrito al abrir el chat (`whatsapp_mensaje`).
+  El botón «Escríbenos» queda fijo abajo a la derecha en todas las páginas y el número también sale en el pie.
 - `templates/`: estructura de las páginas.
 - `static/css/estilos.css`: colores (manual de marca), tipografía y diseño.
 - `static/img/`: imágenes en WebP (versión pequeña y grande de cada una).
