@@ -10,16 +10,21 @@
       "slug": "jhonathan-martinez-daza",
       "nombre": "Jhonathan Martínez Daza",
       "cargo": "Ingeniero de Alimentos, magíster en Calidad y Gestión Integral",
-      "resumen_corto": "Más de 9 años implementando y auditando sistemas de gestión de calidad, inocuidad y sostenibilidad en gastronomía, turismo y retail.",
+      "resumen_corto": "Aproximadamente una década implementando y auditando sistemas de gestión de calidad, inocuidad y sostenibilidad en gastronomía, turismo y retail.",
       "resumen": [
         "Especialista y magíster de la Universidad Santo Tomás en convenio con ICONTEC, con más de 9 años de experiencia en planificación, auditoría e implementación de sistemas de gestión de calidad (ISO 9001, ISO 14001, HACCP), inocuidad alimentaria, sostenibilidad y estandarización de procesos.",
         "Ha liderado proyectos de normalización para el sector de gastronomía y bares, el control de calidad en retail y consumo masivo, y la capacitación de empresarios, con niveles de satisfacción superiores al 92 %. Integra herramientas tecnológicas y Python para analizar datos de calidad y automatizar procesos."
       ],
       "experiencia": [
         {
+          "cargo": "Líder de implementación",
+          "empresa": "Soluciones empresariales El Monarca",
+          "periodo": "Noviembre 2026 - presente"
+        },
+        {
           "cargo": "Asesor de implementación de la NTC 6496 (sostenibilidad para gastronomía y bares)",
           "empresa": "ASOBARES",
-          "periodo": "Agosto 2026 – actual"
+          "periodo": "Julio 2026 – Octubre 2026"
         },
         {
           "cargo": "Profesional especializado en calidad",
@@ -29,7 +34,7 @@
         {
           "cargo": "Profesional de calidad",
           "empresa": "Instituto Distrital de Turismo de Bogotá",
-          "periodo": "Marzo – junio 2023"
+          "periodo": "Marzo 2023 – junio 2023"
         },
         {
           "cargo": "Profesional de calidad",
