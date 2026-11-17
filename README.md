@@ -7,13 +7,21 @@ pip install -r requirements.txt
 python app.py            # http://127.0.0.1:5000
 ```
 
-## Publicar (Render con Docker)
-El `Dockerfile` arranca la página con Gunicorn, sin modo depuración y con un
-usuario sin privilegios. Render asigna el puerto en la variable `PORT`.
+## Publicar (servidor de Google, el mismo de la herramienta HT)
+Desde el 16 nov 2026 la página corre en el servidor de Google Cloud de la herramienta, en `~/paginaweb`,
+con `docker-compose.prod.yml` (Gunicorn con 1 proceso, sin modo depuración, usuario sin privilegios).
+La publica el Caddy de la herramienta con HTTPS automático y su propio subdominio de DuckDNS (variable
+`DOMINIO_WEB` del `.env` de la herramienta). Instalación paso a paso: `DESPLIEGUE.md` de la herramienta, paso 8.
 
-Variable opcional en Render → Environment:
+Cada cambio: `git add .`, `git commit -m "…"`, `git push` y en el servidor `sudo pagina-actualizar`.
+
+Variable opcional (archivo `.env` de `~/paginaweb`, no va a GitHub):
 - `HERRAMIENTA_URL`: dirección de la herramienta digital; si existe, aparece
   «Ingresar a la herramienta» en el menú.
+
+**Render** (https://paginaweb-elmonarca.onrender.com) queda solo para redirigir la dirección anterior:
+tiene la variable `REDIRIGIR_A` con la dirección nueva y envía cada visita a la misma página allá.
+En el servidor de Google esa variable no se define.
 
 ## Dónde cambiar qué
 - `app.py`: textos de programas, planes y la tabla comparativa; enlace del formulario.

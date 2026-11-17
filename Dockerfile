@@ -18,5 +18,5 @@ RUN useradd --create-home web
 USER web
 
 EXPOSE 5000
-# Render define la variable PORT; en local se usa 5000
-CMD ["sh", "-c", "gunicorn app:app --bind 0.0.0.0:${PORT:-5000} --workers 2 --access-logfile -"]
+# PORT: puerto (5000 por defecto). WEB_WORKERS: procesos de Gunicorn (en el servidor de Google se usa 1 para cuidar la memoria)
+CMD ["sh", "-c", "gunicorn app:app --bind 0.0.0.0:${PORT:-5000} --workers ${WEB_WORKERS:-2} --access-logfile -"]

@@ -1,0 +1,31 @@
+# Página web en el servidor de Google (el mismo de la herramienta HT).
+# La publica el Caddy de la herramienta (HTTPS automático) por la red compartida «monarca_compartida»,
+# que crea el docker-compose.prod.yml de la herramienta. Por eso se arranca DESPUÉS de la herramienta:
+#   sudo bash scripts/servidor/actualizar.sh      (la primera vez)
+#   sudo pagina-actualizar                        (las siguientes)
+services:
+  pagina:
+    build: .
+    restart: always
+    expose:
+      - "5000"
+    environment:
+      WEB_WORKERS: "1"                              # un solo proceso: el servidor tiene 1 GB de RAM
+      HERRAMIENTA_URL: "${HERRAMIENTA_URL:-}"       # opcional, desde el archivo .env de esta carpeta
+    mem_limit: 200m
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5000/', timeout=5)"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+    networks:
+      compartida:
+        aliases: [pagina]
+    logging:
+      driver: json-file
+      options: { max-size: "5m", max-file: "3" }
+
+networks:
+  compartida:
+    name: monarca_compartida
+    external: true

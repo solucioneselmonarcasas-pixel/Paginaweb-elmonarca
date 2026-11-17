@@ -10,11 +10,11 @@ import os
 from pathlib import Path
 from urllib.parse import quote
 
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request
 from werkzeug.middleware.proxy_fix import ProxyFix
 
 app = Flask(__name__)
-# Render entrega las peticiones a través de un proxy: así Flask sabe que la página va por HTTPS
+# La página recibe las peticiones a través de un proxy (Caddy en el servidor de Google): así Flask sabe que va por HTTPS
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 
 # Los archivos estáticos (CSS, imágenes) se guardan en caché del navegador 7 días.
@@ -136,11 +136,30 @@ def cabeceras_seguridad(respuesta):
     respuesta.headers["Referrer-Policy"] = "strict-origin-when-cross-origin"
     respuesta.headers["Permissions-Policy"] = "camera=(), microphone=(), geolocation=(), payment=()"
     respuesta.headers["Cross-Origin-Opener-Policy"] = "same-origin"
-    # HSTS solo cuando la página llega por HTTPS (Render pone X-Forwarded-Proto)
+    # HSTS solo cuando la página llega por HTTPS (el proxy pone X-Forwarded-Proto)
     if https:
         respuesta.headers["Strict-Transport-Security"] = "max-age=31536000; includeSubDomains"
     respuesta.headers.pop("Server", None)
     return respuesta
+
+
+# ==========================================
+# REDIRECCIÓN DESDE LA DIRECCIÓN ANTERIOR (Render)
+# ==========================================
+# La página se trasladó al servidor de Google. En Render se define la variable REDIRIGIR_A con la
+# dirección nueva (ej. https://elmonarca.duckdns.org) y toda visita a la dirección vieja se envía
+# a la misma página en la dirección nueva. En el servidor de Google esta variable NO se define.
+REDIRIGIR_A = os.getenv("REDIRIGIR_A", "").strip().rstrip("/")
+
+
+@app.before_request
+def redirigir_direccion_anterior():
+    if REDIRIGIR_A:
+        destino = REDIRIGIR_A + request.path
+        if request.query_string:
+            destino += "?" + request.query_string.decode("utf-8", "ignore")
+        return redirect(destino, code=301)
+    return None
 
 
 @app.context_processor
@@ -176,5 +195,5 @@ def no_encontrada(_error):
 # ==========================================
 if __name__ == "__main__":
     # El modo depuración solo se activa si lo pides: FLASK_DEBUG=1 python app.py
-    # Nunca lo actives en Render: expone una consola que permite ejecutar código.
+    # Nunca lo actives en el servidor: expone una consola que permite ejecutar código.
     app.run(host="127.0.0.1", port=5000, debug=os.getenv("FLASK_DEBUG") == "1")
