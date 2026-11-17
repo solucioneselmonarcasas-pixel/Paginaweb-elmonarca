@@ -20,7 +20,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 # Los archivos estáticos (CSS, imágenes) se guardan en caché del navegador 7 días.
 # Si cambias una imagen o el CSS, sube el número de VERSION_ESTATICOS para forzar la recarga.
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 7
-VERSION_ESTATICOS = "7"
+VERSION_ESTATICOS = "8"
 
 # ==========================================
 # DATOS DE LA EMPRESA (se repiten en toda la web)
@@ -183,6 +183,12 @@ def servicios():
 @app.route("/conocenos")
 def conocenos():
     return render_template("conocenos.html", profesionales=cargar_profesionales(), pagina="conocenos")
+
+
+@app.route("/politica-de-datos")
+def politica_datos():
+    """Política de tratamiento de datos personales (Ley 1581 de 2012). La enlazan el formulario de Google y la herramienta."""
+    return render_template("politica.html", pagina="politica")
 
 
 @app.errorhandler(404)

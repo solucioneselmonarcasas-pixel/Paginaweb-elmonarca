@@ -289,3 +289,21 @@ p { margin: 0 0 1em; max-width: 64ch; }
   .whatsapp__texto { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 }
 @media print { .whatsapp { display: none; } }
+
+/* Política de tratamiento de datos personales (/politica-de-datos) */
+.legal { max-width: 860px; }
+.legal h2 { font-size: clamp(1.25rem, 2.2vw, 1.5rem); margin-top: 2.2rem; }
+.legal h2:first-child { margin-top: 0; }
+.legal p, .legal li { max-width: none; }
+.legal ul, .legal ol { padding-left: 1.4rem; margin: 0 0 1em; }
+.legal li { margin-bottom: .35em; }
+.legal blockquote { margin: 0 0 1em; padding: 1rem 1.2rem; background: var(--tenue); border-left: 4px solid var(--petroleo); border-radius: 0 var(--radio) var(--radio) 0; }
+.legal blockquote p:last-child { margin-bottom: 0; }
+.legal__tabla { overflow-x: auto; margin: 0 0 1.2em; }
+.legal table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+.legal table:has(th:nth-child(3)) { min-width: 520px; }   /* tablas de 3 o 4 columnas: se desplazan de lado en el celular */
+.legal table:has(th:nth-child(4)) { min-width: 640px; }
+.legal th { background: var(--petroleo); color: var(--blanco); text-align: left; font-weight: 600; }
+.legal th, .legal td { padding: .55rem .7rem; border: 1px solid var(--linea); vertical-align: top; }
+.legal tbody tr:nth-child(even) td { background: #F6FAFA; }
+.legal a, .legal td { overflow-wrap: anywhere; }

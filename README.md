@@ -31,6 +31,7 @@ En el servidor de Google esa variable no se define.
   Logo de WhatsApp: descargar el oficial de https://www.meta.com/brand/resources/whatsapp/whatsapp-brand/ y
   guardarlo sin modificar como `static/img/whatsapp.svg` (o `.png`); el botón lo usa solo. Sin ese archivo, muestra una burbuja de chat.
 - `templates/`: estructura de las páginas.
+- `templates/politica.html`: política de tratamiento de datos personales (`/politica-de-datos`, enlazada en el pie). Su texto viene del Word «Contrato empresas/2026-11-17 Politica de tratamiento de datos personales.docx»: si la política cambia, se cambia primero el Word y luego esta página, con nueva versión y fecha.
 - `static/css/estilos.css`: colores (manual de marca), tipografía y diseño.
 - `static/img/`: imágenes en WebP (versión pequeña y grande de cada una).
   Para cambiar una imagen, genera las dos versiones y sube `VERSION_ESTATICOS` en `app.py`.
