@@ -4,15 +4,31 @@
 <section class="portada">
   <div class="portada__interior">
     <div class="portada__texto">
-      <h1>Tu establecimiento, listo para la visita sanitaria</h1>
+      <p class="antetitulo">Plan de saneamiento básico · Resolución 2674 de 2013</p>
+      <h1>Tu establecimiento, <span class="resalte">listo</span> para la visita sanitaria</h1>
       <p class="portada__entrada">Documentamos e implementamos el plan de saneamiento básico que exige la Resolución 2674 de 2013 a bares, restaurantes y panaderías, y dejamos a tu equipo llevando los registros.</p>
       <div class="acciones">
         <a class="boton" href="{{ empresa.formulario }}" target="_blank" rel="noopener noreferrer">Agenda una reunión</a>
-        <a class="boton boton--secundario" href="{{ url_for('servicios') }}">Comparar planes</a>
+        <a class="boton boton--secundario" href="#herramienta">Ver la herramienta</a>
       </div>
     </div>
 
-    {# Elemento central: la lista que revisa el inspector, con los chulos que se marcan al cargar #}
+    {# El Monarca (avatar 3D) presentando, dentro de un aro naranja #}
+    <figure class="guia">
+      <p class="guia__burbuja">¡Hola! Somos El Monarca</p>
+      <img class="guia__avatar" src="{{ url_for('static', filename='img/avatar-presenta.webp') }}?v={{ v }}"
+           width="419" height="492" alt="El Monarca, personaje 3D con bata blanca, presentando" fetchpriority="high">
+    </figure>
+  </div>
+</section>
+
+<section class="bloque bloque--acta" aria-labelledby="acta-intro">
+  <div class="bloque__interior inspector">
+    <div class="inspector__texto">
+      <h2 id="acta-intro">Lo que revisa el inspector, <span class="resalte">al día</span></h2>
+      <p>La norma pide que cada programa esté escrito, implementado y con registros que prueben que se cumple. Nosotros lo armamos contigo y tu equipo lo lleva en el celular.</p>
+    </div>
+    {# La lista que revisa el inspector, con los chulos que se marcan al cargar #}
     <aside class="acta" aria-labelledby="acta-titulo">
       <div class="acta__cabeza">
         <p id="acta-titulo" class="acta__titulo">Lo que revisa el inspector</p>
@@ -36,7 +52,7 @@
 
 <section class="bloque" aria-labelledby="programas-titulo">
   <div class="bloque__interior">
-    <h2 id="programas-titulo">Los cuatro programas, a la medida de tu cocina</h2>
+    <h2 id="programas-titulo">Los cuatro programas, <span class="resalte">a la medida</span> de tu cocina</h2>
     <p class="bloque__entrada">No entregamos plantillas genéricas: cada programa se escribe con las áreas, equipos y rutinas reales de tu establecimiento.</p>
     <div class="programas">
       {% for p in programas %}
@@ -47,6 +63,44 @@
         <figcaption><strong>{{ p.nombre }}</strong>{{ p.detalle }}</figcaption>
       </figure>
       {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="herramienta" id="herramienta" aria-labelledby="herramienta-titulo">
+  <div class="herramienta__interior">
+    <div class="herramienta__video">
+      {% if video_id %}
+      {# Se carga YouTube solo cuando la persona toca reproducir (static/js/video.js). Sin JavaScript, el enlace abre el video en YouTube. #}
+      <a class="video" href="https://www.youtube.com/watch?v={{ video_id }}" data-video="{{ video_id }}" target="_blank" rel="noopener noreferrer"
+         aria-label="Reproducir el video de la herramienta de El Monarca (79 segundos, con voz)">
+        <img src="{{ url_for('static', filename='img/tel-inicio-300.webp') }}?v={{ v }}"
+             srcset="{{ url_for('static', filename='img/tel-inicio-300.webp') }}?v={{ v }} 300w, {{ url_for('static', filename='img/tel-inicio-600.webp') }}?v={{ v }} 600w"
+             sizes="300px" width="300" height="627" loading="lazy" decoding="async" alt="">
+        <span class="video__boton" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M8 5.5v13l10.5-6.5z"/></svg></span>
+        <span class="video__duracion">Ver video · 1:19</span>
+      </a>
+      {% else %}
+      <img class="video video--quieto" src="{{ url_for('static', filename='img/tel-inicio-300.webp') }}?v={{ v }}"
+           srcset="{{ url_for('static', filename='img/tel-inicio-300.webp') }}?v={{ v }} 300w, {{ url_for('static', filename='img/tel-inicio-600.webp') }}?v={{ v }} 600w"
+           sizes="300px" width="300" height="627" loading="lazy" decoding="async"
+           alt="Pantalla de inicio de la herramienta de El Monarca en el celular, con los programas del plan de saneamiento">
+      {% endif %}
+    </div>
+    <div class="herramienta__texto">
+      <p class="antetitulo">La herramienta digital</p>
+      <h2 id="herramienta-titulo">La herramienta <span class="resalte">en acción</span></h2>
+      <p class="herramienta__entrada">Durante el contrato, tu equipo lleva todo el plan desde el celular o el computador. Cada registro queda con fecha, hora y responsable, y sale en PDF listo para el inspector.</p>
+      <ul class="funciones">
+        {% for f in funciones %}
+        <li class="funcion">
+          <img src="{{ url_for('static', filename='img/tel-' ~ f.imagen ~ '-300.webp') }}?v={{ v }}" width="300" height="627"
+               loading="lazy" decoding="async" alt="">
+          <span><strong>{{ f.titulo }}</strong>{{ f.texto }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      <p class="herramienta__nota">Pantallas reales de la herramienta con datos de ejemplo.</p>
     </div>
   </div>
 </section>
@@ -63,6 +117,19 @@
   </div>
 </section>
 
+<section class="piloto" aria-labelledby="piloto-titulo">
+  <div class="piloto__interior">
+    <img class="piloto__avatar" src="{{ url_for('static', filename='img/avatar-pulgar.webp') }}?v={{ v }}" width="270" height="367"
+         loading="lazy" decoding="async" alt="El Monarca, personaje 3D, con el pulgar arriba">
+    <div class="piloto__texto">
+      <p class="antetitulo">Programa piloto en Bogotá</p>
+      <h2 id="piloto-titulo">Buscamos establecimientos para <span class="resalte">el programa piloto</span></h2>
+      <p>Implementamos el plan contigo, capacitamos a tu equipo y te acompañamos con la herramienta digital. A cambio, te pedimos usarla en el día a día y contarnos qué funciona y qué no.</p>
+    </div>
+    <a class="boton" href="{{ empresa.formulario }}" target="_blank" rel="noopener noreferrer">Agenda una reunión</a>
+  </div>
+</section>
+
 <section class="cierre">
   <div class="cierre__interior">
     <h2>Cuéntanos de tu establecimiento</h2>
@@ -71,3 +138,5 @@
   </div>
 </section>
 {% endblock %}
+
+{% block scripts %}{% if video_id %}<script src="{{ url_for('static', filename='js/video.js') }}?v={{ v }}" defer></script>{% endif %}{% endblock %}

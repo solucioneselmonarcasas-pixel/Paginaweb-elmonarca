@@ -7,6 +7,7 @@ de desarrollo de Flask. Para probar en tu equipo:
 """
 import json
 import os
+import re
 from pathlib import Path
 from urllib.parse import quote
 
@@ -20,7 +21,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 # Los archivos estáticos (CSS, imágenes) se guardan en caché del navegador 7 días.
 # Si cambias una imagen o el CSS, sube el número de VERSION_ESTATICOS para forzar la recarga.
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 7
-VERSION_ESTATICOS = "8"
+VERSION_ESTATICOS = "9"
 
 # ==========================================
 # DATOS DE LA EMPRESA (se repiten en toda la web)
@@ -39,6 +40,20 @@ EMPRESA_INFO = {
     # Mensaje que aparece escrito al abrir el chat (la persona lo puede cambiar antes de enviarlo)
     "whatsapp_mensaje": "Hola, quiero información sobre los servicios de El Monarca Soluciones Empresariales.",
 }
+# Video de la herramienta en YouTube (sección «La herramienta en acción» de Inicio).
+# Pega aquí el enlace del video tal como lo copias de YouTube (https://youtu.be/… o https://www.youtube.com/watch?v=… o /shorts/…).
+# Vacío = la sección muestra la pantalla de la herramienta sin el botón de reproducir.
+VIDEO_HERRAMIENTA_YOUTUBE = "https://www.youtube.com/shorts/ja2Pq9I4wXU"
+
+
+def id_youtube(enlace: str) -> str:
+    """Saca el identificador de 11 caracteres de un enlace de YouTube; si no lo reconoce, devuelve vacío."""
+    m = re.search(r"(?:youtu\.be/|v=|/shorts/|/embed/|/live/)([A-Za-z0-9_-]{11})", enlace or "")
+    if m:
+        return m.group(1)
+    return enlace if re.fullmatch(r"[A-Za-z0-9_-]{11}", enlace or "") else ""
+
+
 # Enlace oficial de WhatsApp «clic para chatear» (abre la app en el celular o WhatsApp Web en el computador)
 EMPRESA_INFO["whatsapp_url"] = (f"https://wa.me/{EMPRESA_INFO['whatsapp']}?text="
                                 + quote(EMPRESA_INFO["whatsapp_mensaje"]))
@@ -65,6 +80,14 @@ PROGRAMAS = [
      "detalle": "Separación en la fuente por colores, acopio, ruta interna y gestores autorizados."},
     {"nombre": "Abastecimiento de agua potable", "imagen": "agua", "evidencia": "Registro de pH y cloro, limpieza del tanque",
      "detalle": "Control de pH y cloro, características del agua y limpieza del tanque."},
+]
+
+# Lo que hace la herramienta digital (sección «La herramienta en acción» de Inicio). imagen = static/img/tel-<imagen>-300/600.webp
+FUNCIONES = [
+    {"titulo": "Un toque por cada limpieza", "texto": "Queda la fecha, la hora y quién lo hizo.", "imagen": "ld-registro"},
+    {"titulo": "Dilución exacta", "texto": "Escribes los litros de agua y te dice cuánto producto usar, según tu manual.", "imagen": "dilucion"},
+    {"titulo": "Trampas por grupo", "texto": "Plano de control de plagas y revisión de trampas con capturas por tipo.", "imagen": "plagas-insp"},
+    {"titulo": "Estado de mi plan", "texto": "Indicadores en verde, amarillo o rojo para saber qué te falta antes de la visita.", "imagen": "avance"},
 ]
 
 # Planes: cada uno incluye todo lo del anterior. "incluye" marca en qué planes aparece cada componente.
@@ -117,6 +140,8 @@ def cargar_profesionales() -> list[dict]:
 POLITICA_CONTENIDO = "; ".join([
     "default-src 'self'",
     "img-src 'self' data:",
+    # El video de la herramienta se carga desde YouTube en modo de privacidad mejorada, solo cuando la persona toca reproducir
+    "frame-src https://www.youtube-nocookie.com",
     "style-src 'self' https://fonts.googleapis.com",
     "font-src https://fonts.gstatic.com",
     "script-src 'self'",
@@ -172,7 +197,8 @@ def datos_globales():
 # ==========================================
 @app.route("/")
 def inicio():
-    return render_template("inicio.html", programas=PROGRAMAS, pagina="inicio")
+    return render_template("inicio.html", programas=PROGRAMAS, funciones=FUNCIONES,
+                           video_id=id_youtube(VIDEO_HERRAMIENTA_YOUTUBE), pagina="inicio")
 
 
 @app.route("/servicios")

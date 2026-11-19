@@ -7,6 +7,7 @@
   --petroleo: #0F4C5C;
   --petroleo-hondo: #0A3642;
   --naranja: #F28C28;
+  --naranja-vivo: #F79836;
   --grafito: #2F3542;
   --gris: #5B6470;
   --tenue: #E9F1F2;
@@ -77,15 +78,51 @@ p { margin: 0 0 1em; max-width: 64ch; }
 .menu a[aria-current="page"] { color: var(--petroleo); border-bottom-color: var(--naranja); }
 
 /* ---------- Portada ---------- */
-.portada { background: var(--petroleo); color: var(--blanco); }
+/* Fondo de marca (igual al video y la presentación): petróleo degradado, brillo naranja y retícula de puntos */
+.portada, .herramienta, .piloto, .encabezado {
+  background:
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .07) 1px, transparent 1.6px) 0 0 / 30px 30px,
+    radial-gradient(ellipse 55% 70% at 88% 105%, rgba(242, 140, 40, .26), transparent 70%),
+    radial-gradient(ellipse 45% 55% at 0% 0%, rgba(255, 255, 255, .07), transparent 70%),
+    linear-gradient(180deg, var(--petroleo) 0%, var(--petroleo-hondo) 100%);
+}
+.portada { color: var(--blanco); }
 .portada__interior {
-  max-width: var(--ancho); margin: 0 auto; padding: clamp(3rem, 7vw, 5.5rem) 1.5rem;
-  display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(2rem, 5vw, 4.5rem); align-items: center;
+  max-width: var(--ancho); margin: 0 auto; padding: clamp(2.5rem, 6vw, 4.5rem) 1.5rem clamp(6rem, 10vw, 8rem);
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: clamp(2rem, 5vw, 4rem); align-items: center;
 }
 .portada h1 { color: var(--blanco); max-width: 15ch; }
 .portada__entrada { font-size: 1.15rem; color: #D5E5E8; max-width: 46ch; }
 .portada .boton--secundario { color: var(--blanco); border-color: rgba(255, 255, 255, .6); }
 .portada .boton--secundario:hover { background: rgba(255, 255, 255, .1); border-color: var(--blanco); }
+
+/* Antetítulo y palabra clave en naranja (en fondo claro va el naranja oscuro del manual para que se lea) */
+.antetitulo { font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #A9530A; margin: 0 0 .9rem; }
+.resalte { color: #A9530A; }
+.portada .antetitulo, .herramienta .antetitulo, .piloto .antetitulo,
+.portada .resalte, .herramienta .resalte, .piloto .resalte { color: var(--naranja-vivo); }
+
+/* El Monarca en 3D dentro de un aro naranja, con su burbuja */
+.guia { margin: 0; position: relative; justify-self: center; width: min(100%, 380px); aspect-ratio: 1; }
+.guia::before { content: ""; position: absolute; inset: 6% 0 0; border-radius: 50%;
+                background: rgba(255, 255, 255, .07); border: 3px solid var(--naranja-vivo); }
+.guia__avatar { position: absolute; left: 50%; bottom: -12%; width: 104%; max-width: none; transform: translateX(-50%); }
+.guia__burbuja {
+  position: absolute; top: -6%; left: 50%; transform: translateX(-50%); z-index: 1; margin: 0; white-space: nowrap;
+  background: var(--blanco); color: var(--petroleo); font-weight: 700; font-size: .98rem;
+  padding: .6rem 1.2rem; border-radius: 999px; box-shadow: 0 10px 24px -8px rgba(0, 0, 0, .45);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .guia__avatar { animation: flotar 3.2s ease-in-out infinite; }
+  @keyframes flotar { 50% { transform: translate(-50%, -8px); } }
+}
+
+/* Bloque del acta: sube sobre la portada */
+.bloque.bloque--acta { padding-top: 0; }
+.inspector { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.inspector .acta { transform: translateY(-4.5rem); margin-bottom: -4.5rem; position: relative; }
+.inspector__texto { padding-top: 1rem; }
+.inspector__texto p { color: var(--gris); font-size: 1.08rem; }
 
 /* El acta: hoja de revisión con los cuatro programas */
 .acta {
@@ -136,17 +173,55 @@ p { margin: 0 0 1em; max-width: 64ch; }
 .programa strong { display: block; color: var(--petroleo); font-size: 1.05rem; margin-bottom: .3rem; }
 .programa figcaption { font-size: .93rem; line-height: 1.5; color: var(--gris); }
 
-/* Proceso: es una secuencia real, por eso va numerado y unido por una línea */
+/* Proceso: es una secuencia real; círculos naranja unidos por una línea punteada y tarjetas, como en la presentación */
 .pasos { list-style: none; counter-reset: paso; margin: 2rem 0 0; padding: 0;
-         display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.75rem; position: relative; }
-.pasos::before { content: ""; position: absolute; top: 21px; left: 22px; right: calc((100% - 5.25rem) / 4 - 22px); height: 2px; background: var(--linea); }
+         display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; position: relative; }
+.pasos::before { content: ""; position: absolute; top: 23px; left: 40px; right: 40px; border-top: 2px dashed var(--naranja); }
 .pasos li { counter-increment: paso; position: relative; font-size: .95rem; color: var(--gris); line-height: 1.5; }
 .pasos li::before {
-  content: counter(paso); display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
-  background: var(--blanco); border: 2px solid var(--petroleo); color: var(--petroleo); font-weight: 700;
-  margin-bottom: 1rem; position: relative;
+  content: "0" counter(paso); display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%;
+  background: var(--naranja); color: var(--blanco); font-weight: 700; font-size: .95rem;
+  margin-bottom: 1.1rem; position: relative; box-shadow: 0 0 0 6px var(--tenue);
 }
-.pasos strong { display: block; color: var(--grafito); font-size: 1.05rem; margin-bottom: .25rem; }
+.pasos strong { display: block; color: var(--petroleo); font-size: 1.08rem; margin-bottom: .35rem; }
+.pasos li { background: var(--blanco); border-radius: 14px; padding: 0 1.2rem 1.3rem; box-shadow: 0 10px 28px -16px rgba(15, 76, 92, .35); }
+.pasos li { margin-top: 24px; }
+.pasos li::before { margin-top: -24px; }
+
+/* ---------- La herramienta en acción ---------- */
+.herramienta { color: #D5E5E8; }
+.herramienta__interior { max-width: var(--ancho); margin: 0 auto; padding: clamp(3rem, 7vw, 5rem) 1.5rem;
+  display: grid; grid-template-columns: 320px minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.herramienta h2 { color: var(--blanco); }
+.herramienta__entrada { font-size: 1.08rem; }
+.herramienta__video { justify-self: center; width: 300px; }
+.video { display: block; position: relative; width: 300px; aspect-ratio: 300 / 627; border-radius: 40px; border: 0; }
+.video img { width: 100%; height: 100%; filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .45)); }
+.video__boton { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); width: 88px; height: 88px; border-radius: 50%;
+  background: var(--naranja); display: grid; place-items: center; box-shadow: 0 0 0 10px rgba(242, 140, 40, .3); transition: transform .15s ease; }
+.video__boton svg { width: 40px; height: 40px; fill: var(--blanco); margin-left: 5px; }
+.video:hover .video__boton { transform: translate(-50%, -50%) scale(1.06); }
+.video__duracion { position: absolute; left: 50%; bottom: 9%; transform: translateX(-50%); white-space: nowrap;
+  background: rgba(10, 54, 66, .92); color: var(--blanco); font-weight: 600; font-size: .88rem; padding: .45rem .95rem; border-radius: 999px; }
+.video--quieto { filter: drop-shadow(0 24px 30px rgba(0, 0, 0, .45)); height: auto; }
+.video--reproduciendo { background: #000; border-radius: 22px; height: auto; }
+.funciones { list-style: none; margin: 1.6rem 0 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.funcion { display: grid; grid-template-columns: 64px 1fr; gap: 1rem; align-items: center; padding: .9rem 1rem;
+  background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .16); border-radius: 14px; }
+.funcion img { width: 64px; height: auto; }
+.funcion strong { display: block; color: var(--naranja-vivo); font-size: 1rem; margin-bottom: .2rem; }
+.funcion span { font-size: .92rem; line-height: 1.45; }
+.herramienta__nota { font-size: .82rem; color: #A9BFC4; margin: 1rem 0 0; }
+
+/* ---------- Programa piloto ---------- */
+.piloto { color: #D5E5E8; overflow: hidden; }
+.piloto__interior { max-width: var(--ancho); margin: 0 auto; padding: 2.5rem 1.5rem 0;
+  display: grid; grid-template-columns: 200px minmax(0, 1fr) auto; gap: 2rem; align-items: center; }
+.piloto h2 { color: var(--blanco); margin-bottom: .5rem; }
+.piloto p { margin-bottom: 0; }
+.piloto__texto { padding-bottom: 2.5rem; }
+.piloto__avatar { width: 200px; align-self: end; }
+.piloto .boton { margin-bottom: 2.5rem; }
 
 .proposito { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
 .proposito p { font-size: 1.05rem; }
@@ -159,7 +234,8 @@ p { margin: 0 0 1em; max-width: 64ch; }
 .cierre .boton { grid-column: 2; grid-row: 1 / span 2; }
 
 /* ---------- Servicios ---------- */
-.encabezado { background: var(--petroleo); color: #D5E5E8; }
+.encabezado { color: #D5E5E8; }
+.encabezado__nota { font-size: .98rem !important; color: var(--blanco); font-weight: 600; margin: 0; }
 .encabezado__interior { max-width: var(--ancho); margin: 0 auto; padding: clamp(2.5rem, 6vw, 4rem) 1.5rem; }
 .encabezado h1 { color: var(--blanco); }
 .encabezado p { font-size: 1.12rem; }
@@ -244,7 +320,15 @@ p { margin: 0 0 1em; max-width: 64ch; }
 
 /* ---------- Pantallas medianas y celulares ---------- */
 @media (max-width: 960px) {
-  .portada__interior { grid-template-columns: 1fr; }
+  .portada__interior { grid-template-columns: 1fr; padding-bottom: 5rem; }
+  .guia { width: min(80%, 300px); margin-top: 1.5rem; }
+  .inspector { grid-template-columns: 1fr; }
+  .inspector .acta { transform: none; margin-bottom: 0; }
+  .bloque.bloque--acta { padding-top: clamp(3rem, 7vw, 5rem); }
+  .herramienta__interior { grid-template-columns: 1fr; }
+  .piloto__interior { grid-template-columns: 1fr; text-align: left; padding-top: 2.5rem; }
+  .piloto__avatar { display: none; }
+  .piloto .boton { justify-self: start; }
   .programas { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pasos { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pasos::before { display: none; }
@@ -259,6 +343,7 @@ p { margin: 0 0 1em; max-width: 64ch; }
   .menu .boton { margin-left: auto; }
   .acta { padding: 1.2rem; }
   .pasos { grid-template-columns: 1fr; }
+  .funciones { grid-template-columns: 1fr; }
   .proposito { grid-template-columns: 1fr; gap: 1.5rem; }
   .cierre__interior { grid-template-columns: 1fr; }
   .cierre .boton { grid-column: 1; grid-row: auto; justify-self: start; margin-top: 1rem; }

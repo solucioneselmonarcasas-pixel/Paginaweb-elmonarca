@@ -30,6 +30,9 @@ En el servidor de Google esa variable no se define.
   El botón «Escríbenos» queda fijo abajo a la derecha en todas las páginas y el número también sale en el pie.
   Logo de WhatsApp: descargar el oficial de https://www.meta.com/brand/resources/whatsapp/whatsapp-brand/ y
   guardarlo sin modificar como `static/img/whatsapp.svg` (o `.png`); el botón lo usa solo. Sin ese archivo, muestra una burbuja de chat.
+- `app.py` → `VIDEO_HERRAMIENTA_YOUTUBE`: enlace del video de la herramienta en YouTube (sección «La herramienta en acción» de Inicio).
+  YouTube se carga solo cuando la persona toca reproducir (`static/js/video.js`, dominio youtube-nocookie.com, permitido en la CSP con `frame-src`).
+  Vacío = se muestra la pantalla de la herramienta sin botón de reproducir. `FUNCIONES`: las cuatro tarjetas de esa sección.
 - `templates/`: estructura de las páginas.
 - `templates/politica.html`: política de tratamiento de datos personales (`/politica-de-datos`, enlazada en el pie). Su texto viene del Word «Contrato empresas/2026-11-17 Politica de tratamiento de datos personales.docx»: si la política cambia, se cambia primero el Word y luego esta página, con nueva versión y fecha.
 - `static/css/estilos.css`: colores (manual de marca), tipografía y diseño.
