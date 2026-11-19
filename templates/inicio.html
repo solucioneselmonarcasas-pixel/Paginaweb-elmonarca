@@ -16,8 +16,10 @@
     {# El Monarca (avatar 3D) presentando, dentro de un aro naranja #}
     <figure class="guia">
       <p class="guia__burbuja">¡Hola! Somos El Monarca</p>
-      <img class="guia__avatar" src="{{ url_for('static', filename='img/avatar-presenta.webp') }}?v={{ v }}"
-           width="419" height="492" alt="El Monarca, personaje 3D con bata blanca, presentando" fetchpriority="high">
+      <img class="guia__avatar" src="{{ url_for('static', filename='img/avatar-presenta-300.webp') }}?v={{ v }}"
+           srcset="{{ url_for('static', filename='img/avatar-presenta-300.webp') }}?v={{ v }} 300w, {{ url_for('static', filename='img/avatar-presenta-600.webp') }}?v={{ v }} 600w"
+           sizes="(max-width: 960px) 220px, 270px" width="300" height="618"
+           alt="El Monarca, personaje 3D con bata blanca, presentando" fetchpriority="high">
     </figure>
   </div>
 </section>
@@ -119,8 +121,9 @@
 
 <section class="piloto" aria-labelledby="piloto-titulo">
   <div class="piloto__interior">
-    <img class="piloto__avatar" src="{{ url_for('static', filename='img/avatar-pulgar.webp') }}?v={{ v }}" width="270" height="367"
-         loading="lazy" decoding="async" alt="El Monarca, personaje 3D, con el pulgar arriba">
+    <img class="piloto__avatar" src="{{ url_for('static', filename='img/avatar-tablet-220.webp') }}?v={{ v }}"
+         srcset="{{ url_for('static', filename='img/avatar-tablet-220.webp') }}?v={{ v }} 220w, {{ url_for('static', filename='img/avatar-tablet-440.webp') }}?v={{ v }} 440w"
+         sizes="200px" width="220" height="328" loading="lazy" decoding="async" alt="El Monarca, personaje 3D, usando la herramienta en una tableta">
     <div class="piloto__texto">
       <p class="antetitulo">Programa piloto en Bogotá</p>
       <h2 id="piloto-titulo">Buscamos establecimientos para <span class="resalte">el programa piloto</span></h2>

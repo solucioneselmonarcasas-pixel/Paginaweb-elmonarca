@@ -21,7 +21,7 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
 # Los archivos estáticos (CSS, imágenes) se guardan en caché del navegador 7 días.
 # Si cambias una imagen o el CSS, sube el número de VERSION_ESTATICOS para forzar la recarga.
 app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 60 * 60 * 24 * 7
-VERSION_ESTATICOS = "9"
+VERSION_ESTATICOS = "10"
 
 # ==========================================
 # DATOS DE LA EMPRESA (se repiten en toda la web)
